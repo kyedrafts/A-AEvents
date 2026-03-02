@@ -1,0 +1,1513 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Packages</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --nav-bg:#fad7d5;
+      --ink:#781727;
+      --page-bg:#efe9e1;
+      --border:#ccc;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      background:var(--page-bg);
+      font-family:'Montserrat', sans-serif;
+      color:var(--ink);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background-color: #fad7d5;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .menu-bar {
+      font-size: 24px;
+      cursor: pointer;
+      color: #781727;
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+      transition: transform 0.3s ease;
+      user-select:none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      justify-content: center;
+      align-items:center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #781727;
+      transition: 0.6s;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #f28aa1;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .logo {
+      text-decoration: none;
+      width: 45px;
+      height: 45px;
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .logo img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      background-color: white;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 90px;
+      border-right: 0.5px solid #f28aa1;
+    }
+
+    .sidebar a {
+      padding: 20px 35px;
+      text-decoration: none;
+      font-size: 15px;
+      color: #4a202a;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+    }
+
+    .container{
+      display:flex;
+      height:calc(100vh - 65px); 
+    }
+
+    .left{
+      width:25%;
+      padding:40px 30px;
+      border-right:1px solid var(--border);
+      overflow-y:auto;
+      background:#fff;
+    }
+
+    .pkg-panel{display:none;}
+    .pkg-panel.active{display:block;}
+
+    details{
+      padding:15px 0;
+      border-bottom:1px solid var(--border);
+    }
+
+    summary{
+      cursor:pointer;
+      font-size:16px;
+      font-weight:bold;
+      list-style:none;
+      color:var(--ink);
+    }
+
+    summary::-webkit-details-marker{display:none;}
+
+    summary::after{
+      content:"⮟";
+      float:right;
+      color:var(--ink);
+    }
+
+    details[open] summary::after{content:"⮝";}
+
+    details p{
+      margin-top:10px;
+      font-size:14px;
+      line-height:1.6;
+      color:#333;
+    }
+
+    details ul{
+      margin-top:10px;
+      font-size:14px;
+      line-height:1.6;
+      color:#333;
+      padding-left:18px;
+    }
+
+    .pill{
+      display:inline-block;
+      padding:2px 10px;
+      border-radius:999px;
+      border:1px solid rgba(120,23,39,.25);
+      font-size:12px;
+      color:var(--ink);
+      background:rgba(255,255,255,.7);
+      margin:6px 6px 0 0;
+    }
+
+    .left-title{
+      margin:0 0 18px;
+      font-size:18px;
+      font-weight:700;
+      color:var(--ink);
+      letter-spacing:.2px;
+    }
+
+    .right{
+      width:75%;
+      position:relative;
+      background-size:cover;
+      background-position:center;
+      overflow:hidden;
+    }
+
+    .right h1{
+      margin:0;
+      padding:40px 30px 0;
+      text-align:center;
+      color:var(--ink);
+      font-weight:700;
+      font-size:34px;
+    }
+
+    .package-wrap{
+      position:absolute;
+      top:140px;
+      left:40px;
+      right:40px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .pkg-box{
+      background-color:rgba(255,255,255,0.85);
+      padding:22px 20px;
+      border-radius:6px;
+      min-height:170px;
+      cursor:pointer;
+      border:2px solid transparent;
+      transition:transform .08s ease, border-color .12s ease;
+      user-select:none;
+    }
+
+    .pkg-box:hover{transform:translateY(-2px);}
+    .pkg-box.active{border-color:rgba(120,23,39,.45);}
+
+    .pkg-box h2{
+      margin:0 0 10px;
+      color:var(--ink);
+      font-size:20px;
+      font-weight:700;
+    }
+
+    .pkg-box p{
+      margin:0;
+      font-size:14px;
+      line-height:1.6;
+      color:#333;
+    }
+
+    .pkg-box ul{
+      margin:10px 0 0;
+      padding-left:18px;
+      color:#333;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .pkg-meta{
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    @media (max-width: 900px){
+      .container{flex-direction:column; height:auto;}
+      .left, .right{width:100%;}
+      .right{min-height:70vh;}
+      .package-wrap{
+        position:static;
+        margin:18px;
+        left:auto; right:auto; top:auto;
+        grid-template-columns:1fr;
+      }
+      .right h1{padding:26px 18px 0;}
+      .left{border-right:0; border-bottom:1px solid var(--border);}
+
+      .nav-links{display:none;} 
+    }
+    footer {
+      background-color: #fde2e2; 
+      padding: 60px 5%;
+      color: #781727;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr 1.5fr;
+      gap: 30px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease-out;  }
+
+    footer.show-footer {
+      opacity: 1;
+      transform: translateY(0);   }
+
+    .footer-logo img {
+      width: 150px;
+      background: white;
+      padding: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);   }
+
+    .footer-column h3 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;    }
+
+.footer-column p, .footer-column a {
+    font-size: 0.9rem;
+    margin: 8px 0;
+    text-decoration: none;
+    color: #781727;
+    display: block;
+    line-height: 1.6;   }
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 0.3s;   }
+
+.contact-item:hover {
+    color: #f28aa1;   }
+
+.contact-item i {
+    font-size: 1.2rem;    }
+
+.fb-link {
+    color: #3b5998; 
+    font-weight: 600; }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <div class="menu-bar" onclick="toggleSidebar()">☰</div>
+
+     <div class = "nav-links" >
+        <a href = "index.html"> Home </a>
+        <a href = "2AboutUs.html"> About Us </a>
+        <a href = "3WeddingPackage.html" class = "active"> Wedding Packages </a>
+        <a href = "4Reviews.html"> Reviews </a>
+        <a href = "5Reservation.html"> Reservation </a>
+      </div>
+
+    <a href = "index.html" class = "logo">
+        <img src = "logo.jpg" alt = "A&A Logo">
+      </a>
+    </nav>
+
+  <div id = "sidebar" class = "sidebar">
+      <a href = "javascript:void(0)" class = "closebtn" onclick = "toggleSidebar()"> × </a>
+      <a href = "0Menu_Budget.html"> BUDGET </a>
+      <a href = "0Menu_Expect.html"> WHAT TO EXPECT </a>
+      <a href = "0Menu_Vendors.html"> VENDORS </a>
+      <a href = "0Menu_Venues.html"> VENUES </a>
+    </div>
+
+
+  <div class="container" id="WeddingPackages">
+
+    <div class="left">
+      <div class="left-title" id="leftTitle">Package 1 Details</div>
+      <ul><li>Rates are subject to change without prior notice </ul>
+
+      <div class="pkg-panel active" id="panel-p1">
+        <details>
+          <summary>CATERING SERVICE FOR 150 PAX</summary>
+          <ul> 
+            <li>Catering service included for 150 guests.
+            <br>
+            <span class="pill">ADD ON</span> Php 800/HEAD FOR ADDITIONAL PAX      
+        </details>
+        <details>
+          <summary>TIFFANY CHAIRS FOR ALL</summary>
+          <ul>
+            <li>All guests will be seated in our gorgeous tiffany chairs with cushion
+            <br>
+            <span class="pill">UPGRADE</span> Php 90 per piece for Wooden Chairs<br>
+            <span class="pill">UPGRADE</span> Php 100 per piece for Crystal Chairs
+          </p>
+        </details>
+
+        <details>
+          <summary>PRESIDENTIAL TABLE</summary>
+          <ul>
+            <li>With Linen and table runners, premium centerpieces with floral arrangement, VIP
+            service, tiffany chairs adorned with ribbon (Maximum of 16 pax)
+          
+        </details>
+
+        <details>
+          <summary>GUESTS TABLE</summary>
+          <ul>
+            <li>8-seater Round Tables with floor-length tablecloth, runner of client’s choice, tiffany
+            chairs with cushion, regular centerpieces and table numbers
+          
+        </details>
+
+        <details>
+          <summary>RECEPTION STYLING</summary>
+          <ul>
+            <li>Thematic Stage Design<br>
+            <li>Entrance Backdrop
+          </p>
+        </details>
+
+        <details>
+          <summary>WEDDING AMENITIES</summary>
+          <p>
+	<ul>
+<li> Styled Cake Table, Registration Table and Gift Table
+<li> Bottle of Red Wine for Ceremonial Toast
+            <li> Complete use of Dinnerware, Silverware and Glassware
+            <li> Buffet with Roll top Chafing Dishes and Buffet Lamp
+            <li> Assistance of well-trained uniformed waiters and buffet attendants
+            <li> Food Tasting for Two (Scheduled upon Downpayment)
+          
+        </details>
+
+        <details>
+          <summary>MENU CHOICES</summary>
+          <ul>
+            <li>(1) Choice of Appetizer + (3) Choice of Mains + (1) Pasta + (1) Dessert</li>
+            <li>*Beef or Pork, Chicken and Fish*</li>
+            <li>Includes Steamed Rice, Water and Bottomless Drinks</li>
+          
+       
+
+        <details>
+          <summary>APPETIZER</summary>
+          <ul>
+            <li> Buttered Veggies </li>
+            <li>Grilled Mongolian Vegetable </li>
+            <li>Mixed Vegetable with Seafood </li>
+            <li>Young Corn in Seafood Creamy Sauce</li>
+          
+        </details>
+
+        <details>
+          <summary>MAINS</summary>
+          
+             <ul>
+                  <li>Baked Buttered Chicken</li>
+                  <li>Chicken Cordon Bleu</li>
+                  <li>Chicken Galantine</li>
+                  <li>Chicken Teriyaki</li>
+                  <li>Chicken Tonkatsu</li>
+                  <li>Grilled Chicken BBQ</li>
+                  <li>Honey Glazed Chicken</li>
+                  <li>Hot &amp; Spicy Chicken Wings</li>
+                  <li>Sweet Chicken Hamonado</li>
+                  <li>Fish Fillet in Garlic Sauce</li>
+                  <li>Fish Florentine</li>
+                  <li>Fish ala Pobre in Lemon Butter Sauce</li>
+                  <li>Oriental Fish Fillet and Tofu</li>
+                  <li>Baby Back Ribs</li>
+                  <li>Grilled Pork Teriyaki</li>
+                  <li>Grilled Porkloin in Gravy Sauce</li>
+                  <li>Hawaiian Pork</li>
+                  <li>Korean Spareribs</li>
+                  <li>Pork Morcon</li>
+                  <li>Spicy Pork Caldereta</li>
+                  <li>Stir-fry Pork</li>
+                  <li>Beef Broccoli</li>
+                  <li>Beef Morcon</li>
+                  <li>Beef Stroganoff</li>
+                  <li>Beef Teriyaki</li>
+                  <li>Creamy Lengua Pastel</li>
+                  <li>Lengua Asado</li>
+                  <li>Spicy Beef Caldereta</li>
+                </ul>
+          
+        </details>
+
+        <details>
+          <summary>PASTA</summary>
+          <ul>
+            <li>Baked Lasagna</li>
+            <li>Baked Macaroni</li>
+            <li>Chicken Fettuccine</li>
+            <li>Chicken Spaghetti</li>
+            <li>Crispy Noodle Vegetable</li>
+            <li>Puttanesca Fettuccine</li>
+            <li>Seafood Spaghetti</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>DESSERT</summary>
+          <ul>
+            <li>Buko Pandan</li>
+            <li>Chocolate Panacotta</li>
+            <li>Coffee Jelly</li>
+            <li>Fruit Medley with Syrup</li>
+            <li>Fruit Salad</li>
+            <li>Leche Flan</li>
+            <li>Mango Sago Panacotta</li>
+            <li>Peach Mango Crepe</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>DRINKS</summary>
+          <ul>
+            <li>4 Season</li>
+            <li>Blue Lemonade</li>
+            <li>Cucumber Lemonade</li>
+            <li>House Blend Iced Tea</li>
+            <li>Orange Juice</li>
+            <li>Pink Lemonade</li>
+            <li>Red Iced Tea</li>
+          </ul>
+        </details> </details>
+
+        <details>
+          <summary>CEREMONY AT SAN VICENTE DE PAUL PARISH</summary>
+          <ul>
+
+            <li>ADDRESS: 959 San Marcelino St. Ermita Manila</li>
+            <li>Candle for Secondary Sponsors</li>
+            <li>Wedding Mass</li>
+            <li>Registration of Marriage Certificate</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>RECEPTION AT CASA BLANCA INTRAMUROS</summary>
+          <ul>
+          
+            <li>200 pax capacity</li>
+            <li>6 hours ingress, 4 hours event proper, 2 hours egress</li>
+          </ul>
+        </details>
+
+        <details>
+           <summary>PHOTO AND VIDEO COVERAGE</summary>
+          <ul>
+            <li>Prenuptial Photoshoot</li>
+            <li>Save the Date</li>
+            <li>*Maximum of 6 hrs. Photoshoot. Attire, Location and Food not included*</li>
+            <li>Full Event Photo Coverage</li>
+            <li>Documentary Film</li>
+            <li>Traditional Leather Photo Album</li>
+         
+        
+            <span class="pill">UPGRADE</span> Florence Benneth de Borja Photography - Php 15,000 for SDE Video, Aerial Photography
+          
+        </details>
+
+        <details>
+          <summary>BRIDAL CAR</summary>
+          <ul>
+            <li>White Mitsubishi Xpander</li>
+            <li>4 Hours Service (Hotel-Church-Reception)</li>
+            <li>With Driver, Gas and Car Bouquet</li>
+            <span class="pill">UPGRADE</span> Php 7,000 Vintage Volkswagen Beetle <br>
+            <span class="pill">UPGRADE</span> Php 10,000 Top Down<br>
+            <span class="pill">UPGRADE</span> Php 15,000 Limousine<br>
+          </ul>
+        </details>
+
+        <details>
+          <summary>FLOWER ARRANGEMENT</summary>
+          <ul>
+            <li>10 Pots with Tulle Skirting or Topiary Style for Aisle Flower Arrangement</li>
+            <li>Thematic Entrance Arch</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>FLOWER ENTOURAGE</summary>
+          <ul>
+            <li>Bridal Bouquet</li>
+            <li>Boutonniere for the Groom</li>
+            <li>2 Mother Bouquets</li>
+            <li>2 Father Boutonnieres</li>
+            <li>4 Bouquets for Bridesmaid with Maid of Honor</li>
+            <li>4 Boutonnieres for Groomsmen with Best man</li>
+            <li>6 Corsages for Female Principal Sponsors</li>
+            <li>6 Boutonnieres for Male Principal Sponsors</li>
+            <li>3 Boutonnieres for Bearers</li>
+            <li>2 Flower Girls Basket filled with Petals</li>
+            <span class="pill">ADD ONS</span> Php 500 per Mini Bouquet<br>
+            <span class="pill">ADD ONS</span> Php 250 per Boutonniere and Corsage<br>
+            <span class="pill">ADD ONS</span> Php 380 per Flower Basket<br>
+          </ul>
+        </details>
+
+        <details>
+          <summary>LIGHTS AND SOUND SYSTEM</summary>
+          <ul>
+            
+            <li>2 High Powered Speakers</li>
+            <li>12 Par 54 Led Mood Lights</li>
+            <li>2 Wireless Microphones</li>
+            <li>Smoke Machine</li>
+            <span class="pill">ADD ON</span> Php 4,000 Pair of Moving Heads<br>
+            <span class="pill">ADD ON</span> Php 5,000 Projector with Screen<br>
+            <span class="pill">ADD ON</span> Php 10,000 String Lights<br>
+            <span class="pill">ADD ON</span> Php 20,000 9x12 LED Wall<br>
+          </ul>
+        </details>
+
+        <details>
+          <summary>WEDDING COORDINATION</summary>
+          <ul>
+            <li>Unlimited phone, email, personal support and consultations</li>
+            <li>Conceptualize themes and motifs that will suit the client’s personality</li>
+            <li>Create a planning timeline of overall wedding activities</li>
+            <li>Assist in negotiation with all suppliers</li>
+            <li>Assist in choosing menus</li>
+            <li>Assist to conceptualize layout based on the floor plan</li>
+            <li>Guest list and RSVP management</li>
+            <li>Provide the couple detailed checklist and itinerary</li>
+            <li>2 Event Specialist to supervise with 2-way Radio</li>
+            <li>2-3 Assistant Coordinators for guest assistance</li>
+            <li>Entourage and ceremonial items management at the Ceremony</li>
+            <li>Guest flow management at Reception</li>
+            <li>Bride and Groom Assistance for the entire day</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>EVENT HOST</summary>
+          <ul>
+            <li>Female Host with Professional Delivery</li>
+            <li>English Proficiency</li>
+            <li>Custom Program Flow</li>
+            <li>Game Facilitation</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>PROFESSIONAL HAIR AND MAKEUP</summary>
+          <ul>
+            <li> Engagement Session/Prenup Shoot 
+            <ul><li>3 Different Looks and Retouches
+            <ul><li>Hair and Traditional Makeup for Bride 
+            	<li>Grooming for Fiancée</li></ul></ul>
+            <li>Day of the Wedding
+            <ul><li>3 Different Looks (Bridal Shoot, Ceremonial and Reception)</li>
+            <ul><li> Hair and Airbrush Makeup for Bride
+            <li> Grooming of Fiancée
+            <li>Traditional Make up for Mother of Groom and Mother of the Bride </li>
+            
+            <span class="pill">ADD ON</span> Php 1,500 per head for Traditional Hair and Makeup<br>
+            <span class="pill">ADD ON</span> Php 3,500 per head for Airbrush Makeup<br>
+          </ul>
+        </details>
+
+        <details>
+          <summary>BRIDAL CAKE</summary>
+          <ul>
+            <li>3-tier fondant cake, bottom tier edible only</li>
+            <li>Size: 8x4 bottom, 7x4 middle, 6x4 top</li>
+            <li>Any design will do</li>
+            <span class="pill">UPGRADE</span> Php 4,500 for 3-tier All Edible
+          </ul>
+        </details>
+
+        <details>
+          <summary>INVITATIONS</summary>
+          <ul>
+            <li>30 custom digitally printed 3-paged Invitations</li>
+            <li>Envelope and Monogram Seal</li>
+            <ul><li><small>*Maximum of 3 revisions only. P250 will be charge for succeeding revisions*</li>
+            <li>*Delivery fee not included*</li></ul></small>
+            <span class="pill">ADD ONS</span> Php 50 per page on top of 3 pages<br>
+            <span class="pill">ADD ONS</span> Php 150 per Invitation
+          </ul>
+        </details>
+
+        <details>
+          <summary>SPONSORS GIVEAWAYS</summary>
+          <ul>
+            <li>12 pcs Creatively Designed Wine with Wine Holder</li>
+            <span class="pill">ADD ONS</span> Php 350 per piece<br>
+          </ul>
+        </details>
+
+        <details>
+          <summary>GIVEAWAYS FOR GUESTS</summary>
+          <ul>
+    
+            <li>50 pcs Thank you Gifts with Note Tags</li>
+            <li>Choice of: Hand Sanitizer, Mason Jar, Succulents</li>
+            <span class="pill">ADD ONS</span> Php 95 per piece<br>
+          </ul>
+        </details>
+
+        <details>
+          <summary>FREEBIES!</summary>
+          <ul>
+            <li>FREE Use of Mannequin</li>
+            <li>FREE Personalized Robe for Bride</li>
+            <li>FREE Welcome Board and Photo Collage Board</li>
+            <li>FREE 2-Hours Unlimited Photobooth</li>
+            <li>FREE Wedding Accessories (Veil, Cord, Candle, Arrhae, Bible, Pillows)</li>
+            <li>FREE “Here Comes the Bride” Banner</li>
+            <li>FREE Party Poppers or Sparklers for Bride and Groom Grand Entrance at Reception</li>
+          </ul>
+        </details>
+
+      </div>
+
+      <div class="pkg-panel" id="panel-p2">
+       
+
+        <details>
+          <summary>CATERING SERVICE FOR 100 PAX</summary>
+          <ul>
+            <li>Catering service included for 100 guests.</li>
+          </ul>
+          <p>
+            <span class="pill">ADD ON</span> Php 800/HEAD FOR ADDITIONAL PAX
+            <br><br>
+          </p>
+        </details>
+
+        <details>
+          <summary>TIFFANY CHAIRS FOR ALL</summary>
+          <ul>
+            <li>All guests will be seated in our gorgeous tiffany chairs with cushion</li>
+          </ul>
+          <p>
+            <span class="pill">UPGRADE</span> Php 90 per piece for Wooden Chairs<br>
+            <span class="pill">UPGRADE</span> Php 100 per piece for Crystal Chairs
+          </p>
+        </details>
+
+        <details>
+          <summary>PRESIDENTIAL TABLE</summary>
+          <ul>
+            <li>With Linen and table runners, premium centerpieces with floral arrangement, VIP service, tiffany chairs adorned with ribbon (Maximum of 16 pax)</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>GUESTS TABLE</summary>
+          <ul>
+            <li>8-seater Round Tables with floor-length tablecloth, runner of client’s choice, tiffany chairs with cushion, regular centerpieces and table numbers</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>RECEPTION STYLING</summary>
+          <ul>
+            <li>Thematic Stage Design</li>
+            <li>Entrance Tunnel</li>
+            <li>30x30 Ceiling Treatment (Trusses included)</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>WEDDING AMENITIES</summary>
+          <ul>
+            <li>Styled Cake Table, Registration Table and Gift Table</li>
+            <li>Bottle of Red Wine for Ceremonial Toast</li>
+            <li>Complete use of Dinnerware, Silverware and Glassware</li>
+            <li>Buffet with Roll top Chafing Dishes and Buffet Lamp</li>
+            <li>Assistance of well-trained uniformed waiters and buffet attendants</li>
+            <li>Food Tasting for Two (Scheduled upon Downpayment)</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>MENU CHOICES</summary>
+          <ul>
+            <li>(1) Choice of Appetizer + (3) Choice of Mains + (1) Pasta + (1) Dessert</li>
+            <li>*Beef or Pork, Chicken and Fish*</li>
+            <li>Includes Steamed Rice, Water and Bottomless Drinks</li>
+          </ul>
+        
+
+        <details>
+          <summary>APPETIZER</summary>
+          <ul>
+            <li>Buttered Veggies</li>
+            <li>Grilled Mongolian Vegetable</li>
+            <li>Mixed Vegetable with Seafood</li>
+            <li>Young Corn in Seafood Creamy Sauce</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>MAINS</summary>
+          <ul>
+            <li>Baked Buttered Chicken</li>
+            <li>Chicken Cordon Bleu</li>
+            <li>Chicken Galantine</li>
+            <li>Chicken Teriyaki</li>
+            <li>Chicken Tonkatsu</li>
+            <li>Grilled Chicken BBQ</li>
+            <li>Honey Glazed Chicken</li>
+            <li>Hot &amp; Spicy Chicken Wings</li>
+            <li>Sweet Chicken Hamonado</li>
+            <li>Fish Fillet in Garlic Sauce</li>
+            <li>Fish Florentine</li>
+            <li>Fish ala Pobre in Lemon Butter Sauce</li>
+            <li>Oriental Fish Fillet and Tofu</li>
+            <li>Baby Back Ribs</li>
+            <li>Grilled Pork Teriyaki</li>
+            <li>Grilled Porkloin in Gravy Sauce</li>
+            <li>Hawaiian Pork</li>
+            <li>Korean Spareribs</li>
+            <li>Pork Morcon</li>
+            <li>Spicy Pork Caldereta</li>
+            <li>Stir-fry Pork</li>
+            <li>Beef Broccoli</li>
+            <li>Beef Morcon</li>
+            <li>Beef Stroganoff</li>
+            <li>Beef Teriyaki</li>
+            <li>Creamy Lengua Pastel</li>
+            <li>Lengua Asado</li>
+            <li>Spicy Beef Caldereta</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>PASTA</summary>
+          <ul>
+            <li>Baked Lasagna</li>
+            <li>Baked Macaroni</li>
+            <li>Chicken Fettuccine</li>
+            <li>Chicken Spaghetti</li>
+            <li>Crispy Noodle Vegetable</li>
+            <li>Puttanesca Fettuccine</li>
+            <li>Seafood Spaghetti</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>DESSERT</summary>
+          <ul>
+            <li>Buko Pandan</li>
+            <li>Chocolate Panacotta</li>
+            <li>Coffee Jelly</li>
+            <li>Fruit Medley with Syrup</li>
+            <li>Fruit Salad</li>
+            <li>Leche Flan</li>
+            <li>Mango Sago Panacotta</li>
+            <li>Peach Mango Crepe</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>DRINKS</summary>
+          <ul>
+            <li>4 Season</li>
+            <li>Blue Lemonade</li>
+            <li>Cucumber Lemonade</li>
+            <li>House Blend Iced Tea</li>
+            <li>Orange Juice</li>
+            <li>Pink Lemonade</li>
+            <li>Red Iced Tea</li>
+          </ul>
+        </details></details>
+
+        <details>
+          <summary>CEREMONY AT MANILA CATHEDRAL
+OR SAN AGUSTIN CHURCH</summary>
+          <ul>
+            <li>Candle for Secondary Sponsors</li>
+            <li>Wedding Mass</li>
+            <li>Registration of Marriage Certificate</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>RECEPTION AT PALACIO DE MAYNILA</summary>
+          <ul>
+            <li>Use of Anteroom and Lounge for the duration of the event (for main tent)</li>
+            <li>Use of Stage (16 x 32 x 3 feet) / Platform (12 x 24 x 1 foot) / Widescreen</li>
+            <li>Waived corkage fee on all food and drinks brought in by clients</li>
+            <li>3 hours for ingress, 6 hrs event proper, 2 hours for egress</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>PHOTO AND VIDEO COVERAGE</summary>
+          <ul>
+            <li>Prenuptial Photoshoot</li>
+            <li>Save the Date</li>
+            <li>*Maximum of 6 hrs. Photoshoot. Attire, Location and Food not included*</li>
+            <li>Full Event Photo Coverage</li>
+            <li>Onsite Photo</li>
+            <li>Same Day Edit</li>
+            <li>Aerial Photography (Wedding Day only)</li>
+            <li>Traditional Leather Photo Album</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>EVENT HOST</summary>
+          <ul>
+            <li>Female Host with Professional Delivery</li>
+            <li>English Proficiency</li>
+            <li>Custom Program Flow</li>
+            <li>Game Facilitation</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>FLOWER ARRANGEMENT</summary>
+          <ul>
+            <li>10 Pots with Tulle Skirting or Topiary Style for Aisle Flower Arrangement</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>FLOWER ENTOURAGE</summary>
+          <ul>
+            <li>Bridal Bouquet</li>
+            <li>Boutonniere for the Groom</li>
+            <li>2 Mother Bouquets</li>
+            <li>2 Father Boutonnieres</li>
+            <li>4 Bouquets for Bridesmaid with Maid of Honor</li>
+            <li>4 Boutonnieres for Groomsmen with Best man</li>
+            <li>6 Corsages for Female Principal Sponsors</li>
+            <li>6 Boutonnieres for Male Principal Sponsors</li>
+            <li>3 Boutonnieres for Bearers</li>
+            <li>2 Flower Girls Basket filled with Petals</li>
+          </ul>
+          <p>
+            <span class="pill">ADD ONS</span> Php 500 per Mini Bouquet<br>
+            <span class="pill">ADD ONS</span> Php 250 per Boutonniere and Corsage<br>
+            <span class="pill">ADD ONS</span> Php 380 per Flower Basket
+          </p>
+        </details>
+
+        <details>
+          <summary>LIGHTS AND SOUND SYSTEM</summary>
+          <ul>
+            <li>2 High Powered Speakers</li>
+            <li>12 Par 54 Led Mood Lights</li>
+            <li>2 Wireless Microphones</li>
+            <li>2 Moving Heads</li>
+            <li>9x12 LED Wall</li>
+            <li>Smoke Machine</li>
+          </ul>
+          <p>
+            <span class="pill">ADD ON</span> Php 4,000 for Pair of Moving Heads<br>
+            <span class="pill">ADD ON</span> Php 10,000 String Lights
+          </p>
+        </details>
+
+        <details>
+          <summary>WEDDING COORDINATION</summary>
+          <ul>
+            <li>Unlimited phone, email, personal support and consultations</li>
+            <li>Conceptualize themes and motifs that will suit the client’s personality</li>
+            <li>Create a planning timeline of overall wedding activities</li>
+            <li>Assist in negotiation with all suppliers</li>
+            <li>Assist in choosing menus</li>
+            <li>Assist to conceptualize layout based on the floor plan</li>
+            <li>Guest list and RSVP management</li>
+            <li>Provide the couple detailed checklist and itinerary</li>
+            <li>2 Event Specialist to supervise with 2-way Radio</li>
+            <li>2-3 Assistant Coordinators for guest assistance</li>
+            <li>Entourage and ceremonial items management at the Ceremony</li>
+            <li>Guest flow management at Reception</li>
+            <li>Bride and Groom Assistance for the entire day</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary>BRIDAL CAKE</summary>
+          <ul>
+            <li>3-tier fondant cake, bottom tier edible only</li>
+            <li>Size: 8x4 bottom, 7x4 middle, 6x4 top</li>
+            <li>Any design will do</li>
+          </ul>
+          <p>
+            <span class="pill">UPGRADE</span> Php 4,500 for 3-tier All Edible
+          </p>
+        </details>
+
+        <details>
+          <summary>PROFESSIONAL HAIR AND MAKEUP</summary>
+          <ul>
+            <li> Engagement Session/Prenup Shoot 
+            <ul><li>3 Different Looks and Retouches
+            <ul><li>Hair and Traditional Makeup for Bride 
+            	<li>Grooming for Fiancée</li></ul></ul>
+            <li>Day of the Wedding
+            <ul><li>3 Different Looks (Bridal Shoot, Ceremonial and Reception)</li>
+            <ul><li> Hair and Airbrush Makeup for Bride
+            <li> Grooming of Fiancée
+            <li>Traditional Make up for Mother of Groom and Mother of the Bride </li>
+            
+            <span class="pill">ADD ON</span> Php 1,500 per head for Traditional Hair and Makeup<br>
+            <span class="pill">ADD ON</span> Php 3,500 per head for Airbrush Makeup<br>
+          </ul>
+        </details>
+
+        <details>
+          <summary>BRIDAL CAR</summary>
+          <ul>
+            <li>White Mitsubishi Xpander</li>
+            <li>4 Hours Service (Hotel-Church-Reception)</li>
+            <li>With Driver, Gas and Car Bouquet</li>
+          </ul>
+          <p>
+            <span class="pill">UPGRADE</span> Php 7,000 Vintage Volkswagen Beetle<br>
+            <span class="pill">UPGRADE</span> Php 10,000 Top Down<br>
+            <span class="pill">UPGRADE</span> Php 15,000 Limousine
+          </p>
+        </details>
+
+        <details>
+          <summary>INVITATIONS</summary>
+          <ul>
+            <li>30 custom digitally printed 3-paged Invitations</li>
+            <li>Envelope and Monogram Seal</li>
+            <li>*Maximum of 3 revisions only. P250 will be charge for succeeding revisions*</li>
+            <li>*Delivery fee not included*</li>
+          </ul>
+          <p>
+            <span class="pill">ADD ONS</span> Php 50 per page on top of 3 pages<br>
+            <span class="pill">ADD ONS</span> Php 150 per Invitation
+          </p>
+        </details>
+
+        <details>
+          <summary>SPONSORS GIVEAWAYS</summary>
+          <ul>
+            <li>12 pcs Creatively Designed Wine with Wine Holder</li>
+          </ul>
+          <p>
+            <span class="pill">ADD ONS</span> Php 350 per piece
+          </p>
+        </details>
+
+        <details>
+          <summary>GIVEAWAYS FOR GUESTS</summary>
+          <ul>
+            <li>50 pcs Thank you Gifts with Note Tags</li>
+            <li>Choice of: Hand Sanitizer, Mason Jar, Succulents</li>
+          </ul>
+          <p>
+            <span class="pill">ADD ONS</span> Php 95 per piece
+          </p>
+        </details>
+
+        <details>
+          <summary>ADD ONS AND UPGRADES</summary>
+
+          <ul><details>
+            <summary>COFFEE BOOTH</summary>
+
+            <ul><details>
+              <summary>PRICES:</summary>
+              <ul>
+                <li>50 PAX - P8,000</li>
+                <li>100 PAX - P10,000</li>
+                <li>150 PAX - P15,000</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>INCLUSIONS:</summary>
+              <ul>
+                <li>Full Setup Coffee Cart</li>
+                <li>Espresso Machine</li>
+                <li>Barista and Staff</li>
+                <li>Fresh Arabica + Robusta Beans</li>
+                <li>Hot and Iced Beverages</li>
+                <li>3 hours Service</li>
+                <li>P1,000 for every 10 Pax Additional</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>MENU:</summary>
+              <ul>
+                <li>COFFEE BASED: Americano, Butterscotch Latte, Cafe Latte, Caramel Macchiato, Caramel Latte, Mocha Latte, Spanish Latte, White Mocha Latte</li>
+                <li>NON COFFEE: Chocolate, Strawberry</li>
+              </ul>
+            </details>
+          </details>
+
+          <details>
+            <summary>CREW MEAL</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>P160/Meal
+                <ul>	<li>1 Rice, 1 Viand, 1 Bottled Water</li></ul>
+                <li>P180/Meal</li>
+                <li>1 Side Dish, 1 Rice, 1 Viand, 1 Bottled Water</li>
+                <li>P200/Meal</li>
+                <li>1 Side Dish, 1 Rice, 1 Viand, 1 Dessert, 1 Bottled Water</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>BREAKFAST:</summary>
+              <ul>
+                <li>Hamsilog</li>
+                <li>Hotsilog</li>
+                <li>Porksilog</li>
+                <li>Chicksilog</li>
+                <li>Tapsilog</li>
+                <li>Tosilog</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>LUNCH & DINNER:</summary>
+              <ul>
+                <li>Chicken Adobo</li>
+                <li>Chicken Afritada</li>
+                <li>Chicken Curry</li>
+                <li>Fried Chicken</li>
+                <li>Bicol Express</li>
+                <li>Pork BBQ</li>
+                <li>Pork Giniling</li>
+                <li>Pork Menudo</li>
+                <li>Pork Steak</li>
+              </ul>
+            </details>
+
+            <ul>
+              <li>*Delivery fee not included*</li>
+            </ul>
+          </details>
+
+          <details>
+            <summary>DESSERT STATION</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>50 PAX - P8,000</li>
+                <li>100 PAX - P10,000</li>
+                <li>150 PAX - P15,000</li>
+                <li>P1,000 for every 10 Pax Additional</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>INCLUSIONS:</summary>
+              <ul>
+                <li>Donuts, Cupcakes, Choco Cups, Brownies, Caramel Bars, Crinkles, Cookies, Nacho Chips, Mallows, Wafers, Cheeseballs</li>
+                <li>Iced Tea and Juice as Welcome Drinks</li>
+              </ul>
+            </details>
+          </details>
+
+          <details>
+            <summary>GARDEN SALAD</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>50 PAX - P8,000</li>
+                <li>100 PAX - P12,000</li>
+                <li>150 PAX - P15,000</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>INCLUSIONS:</summary>
+              <ul>
+                <li>Fresh Garden Greens</li>
+                <li>6-8 toppings: Bell Peppers, Carrots, Cucumber, Corn, Onions, Olives, Tomatoes</li>
+                <li>Caesar Salad and Thousand Island Dressing</li>
+                <li>Seasonal Fruits</li>
+                <li>Cucumber Lemonade as Welcome Drinks</li>
+                <li>P1,500 for every 10 Pax Additional</li>
+              </ul>
+            </details>
+          </details>
+
+          <details>
+            <summary>GRAZING TABLE</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>50 PAX - P10,000</li>
+                <li>100 PAX - P15,000</li>
+                <li>150 PAX - P18,000</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>INCLUSIONS:</summary>
+              <ul>
+                <li>4 Choices of Cold Cuts, 4 Choices of Cheese, Sausage, Seasonal Fruits</li>
+                <li>Bread Platter with Spreads, Crackers and Pretzels</li>
+                <li>Iced Tea and Juice as Welcome Drinks</li>
+                <li>P1,500 for every 10 Pax Additional</li>
+              </ul>
+            </details>
+          </details>
+
+          <details>
+            <summary>JUICE BAR</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>2 Flavors - P3,000</li>
+                <li>3 Flavors - P4,000</li>
+                <li>4 Flavors - P5,000</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>FLAVORS:</summary>
+              <ul>
+                <li>Blue Lemonade, Cucumber Lemonade, Four Season, Honey Blend Iced Tea, Orange, Sago’t Gulaman</li>
+              </ul>
+            </details>
+          </details>
+
+          <details>
+            <summary>LECHON</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>50 PAX - P10,000</li>
+                <li>100 PAX - P15,000</li>
+                <li>150 PAX - P18,000</li>
+                <li>*Corkage and Delivery fee not included*</li>
+              </ul>
+            </details>
+          </details>
+
+          <details>
+            <summary>MOBILE BAR</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>50 PAX - P10,000</li>
+                <li>100 PAX - P15,000</li>
+                <li>150 PAX - P18,000</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>INCLUSIONS:</summary>
+              <ul>
+                <li>3 hrs Unlimited Serving</li>
+                <li>2 Trained Bartenders</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>COCKTAILS:</summary>
+              <ul>
+                <li>Zombie, Weng Weng, Green Minded, Stoplight, Tequila Sunrise, Orange Daiquiri, Screw Driver, Melon Paradise, Blue Gibson, Strawberry Punch</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>SHOOTERS:</summary>
+              <ul>
+                <li>Blue Kamikaze, Sweet Russian, Orange Blossom, Green Lagoon, El Presidente</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>FLAMING SHOTS:</summary>
+              <ul>
+                <li>Atomic Fusion, Hot Shots, Bad Shots, 4th of July</li>
+              </ul>
+            </details>
+          </details>
+
+          <details>
+            <summary>MUSICIANS</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>Quartet - P22,000</li>
+                <li>Keyboardist, Acoustic Guitarist, Violinist, Female Vocalist</li>
+                <li>Quintet - P25,000</li>
+                <li>Keyboardist, Acoustic Guitarist, Violinist, E - Drummer, Female Vocalist</li>
+                <li>Full Band - P28,000</li>
+                <li>Keyboardist, Acoustic Guitarist, Violinist, Saxophonist, Male Vocalist, Female Vocalist</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>INCLUSIONS:</summary>
+              <details>
+                <summary>CEREMONY:</summary>
+                <ul>
+                  <li>(1) Entourage, (1) Bridal March, Liturgical Songs, (1) First Kiss, (2) Contract Signing, (3) Picture Taking</li>
+                </ul>
+              </details>
+              <details>
+                <summary>RECEPTION:</summary>
+                <ul>
+                  <li>(10) Arrival of Guests, (10) Meal Time, (1) First Dance, (2) Dances with Parents</li>
+                </ul>
+              </details>
+            </details>
+          </details>
+
+          <details>
+            <summary>SLIDER STATION</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>50 PAX - P8,000</li>
+                <li>100 PAX - P10,000</li>
+                <li>150 PAX - P15,000</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>INCLUSIONS:</summary>
+              <ul>
+                <li>Mini Burgers, Mini Hotdog Sandwich, Mini Clubhouse, Nachos and Salsa, Pretzel and Crackers, Seasonal Fruits</li>
+                <li>Iced Tea and Juice as Welcome Drinks</li>
+                <li>P1,000 for every 10 Pax Additional</li>
+              </ul>
+            </details>
+          </details>
+
+          <details>
+            <summary>STREET FOOD</summary><ul>
+
+            <details>
+              <summary>PRICELIST:</summary>
+              <ul>
+                <li>50 PAX - P9,000</li>
+                <li>100 PAX - P10,000</li>
+                <li>150 PAX - P15,000</li>
+              </ul>
+            </details>
+
+            <details>
+              <summary>INCLUSIONS:</summary>
+              <ul>
+                <li>Chicken Ball, Fishball, Kikiam, Squidball, Cheese Stick, French Fries, Siomai</li>
+                <li>Sago’t Gulaman as Welcome Drinks</li>
+                <li>P1,000 for every 10 Pax Additional</li>
+              </ul>
+            </details>
+          </details>
+
+        
+
+      </div>
+    </div>
+
+    <div class="right">
+      <h1>Wedding Package</h1>
+
+      <div class="package-wrap">
+        <div class="pkg-box active" id="card-p1" role="button" tabindex="0">
+          <h2>Package 1 — PHP 320,000</h2>
+          <p>Click to view Package 1 details on the left.</p>
+          <a href="package1" target="_blank" rel="noopener">
+			<img src="https://images.squarespace-cdn.com/content/v1/5ae7ac29e74940ea6cfd4558/258edabc-ea56-4218-89f6-b513d30402c7/wedding-reception-photographed.gif" alt="Package 1 Preview" style="width:100%; border-radius:6px; display:block; margin:10px 0;">
+  		</a>
+
+          <div class="pkg-meta">
+            <span class="pill">150 pax catering</span>
+            <span class="pill">Tiffany chairs</span>
+            <span class="pill">Entrance backdrop</span>
+          </div>
+          <ul>
+            <li>Wedding amenities + menu choices</li>
+            <li>Photo/video, bridal car, flowers, lights &amp; sound</li>
+            <li>Coordination, HMUA, cake, invitations, giveaways, freebies</li>
+          </ul>
+        </div>
+
+        <div class="pkg-box" id="card-p2" role="button" tabindex="0">
+          <h2>Package 2 — PHP 530,000</h2>
+          <p>Click to view Package 2 details on the left.</p>
+          <a href="package2" target="_blank" rel="noopener">
+    <img src="https://sarazarrella.com/wp-content/uploads/2022/01/Creating-Wow-Factor-with-Venue-Design_Wedding-Secrets-Unveiled-Podcast_1.gif" 
+    alt="Package 2 Preview" style="width:100%; border-radius:6px; display:block; margin:10px 0;"></a>
+
+          <div class="pkg-meta">
+            <span class="pill">100 pax catering</span>
+            <span class="pill">Ceiling treatment</span>
+            <span class="pill">LED wall + moving heads</span>
+          </div>
+          <ul>
+            <li>Reception + ceremony venue options</li>
+            <li>More premium inclusions</li>
+            <li>Extra upgrades list</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      if (sidebar.style.width === "400px") {
+        sidebar.style.width = "0";
+      } else {
+        sidebar.style.width = "400px";
+      }
+    }
+
+</script>
+    <script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show-up');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(document.querySelector('.prep-section'));
+</script>
+      
+  <footer id = "main-footer">
+    <div class = "footer-logo">
+        <img src = "A&A.jfif" alt = "A&A Events">
+    </div>
+
+    <div class = "footer-column">
+        <h3>DEVELOPERS</h3>
+        <p>Arcilla, Kahreen Mikaela</p>
+        <p>Destriza, Kathleen Glenn</p>
+        <p>Lapuz, Khalel</p>
+        <p>Magdamit, Daynee Allison</p>
+        <p>Patungan, Camilla Sopiah</p>
+    </div>
+
+    <div class = "footer-column">
+        <h3> A&A EVENTS </h3>
+        <p> Alonso, Patrice Ghiarem </p>
+        <p> Alonso, Robert </p>
+    </div>
+
+    <div class = "footer-column">
+        <h3> CONTACTS </h3>
+        
+        <div class = "contact-item" onclick = "copyText('0936 379 5147')">
+            <i class = "fa-solid fa-phone"></i>
+            <span>0936 379 5147</span>
+        </div>
+
+        <a href = "https://www.facebook.com/eventsbyAA" target = "_blank" class = "contact-item">
+            <i class = "fa-brands fa-facebook"></i>
+            <span class = "fb-link"> A&A Events  </span>
+        </a>
+
+        <div class = "contact-item" onclick = "copyText('ghiarem.arcilla@gmail.com')">
+            <i class = "fa-solid fa-envelope"></i>
+            <span> ghiarem.arcilla@gmail.com </span>
+        </div>
+
+        <div class = "contact-item" onclick = "copyText('eventsbyaa@gmail.com')">
+            <i class = "fa-solid fa-envelope" ></i>
+            <span>eventsbyaa@gmail.com</span>
+        </div>
+    </div>
+</footer>
+    
+    <script>
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show-footer');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  footerObserver.observe(document.querySelector('#main-footer'));
+
+  function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Copied to clipboard: " + text);
+    });
+  }
+  </script>
+
+  <script>
+    const cardP1 = document.getElementById('card-p1');
+    const cardP2 = document.getElementById('card-p2');
+    const panelP1 = document.getElementById('panel-p1');
+    const panelP2 = document.getElementById('panel-p2');
+    const leftTitle = document.getElementById('leftTitle');
+
+    function setActive(pkg){
+      const isP1 = pkg === 1;
+
+      panelP1.classList.toggle('active', isP1);
+      panelP2.classList.toggle('active', !isP1);
+
+      cardP1.classList.toggle('active', isP1);
+      cardP2.classList.toggle('active', !isP1);
+
+      leftTitle.textContent = isP1 ? 'Package 1 Details' : 'Package 2 Details';
+      document.querySelector('.left').scrollTop = 0;
+    }
+
+    cardP1.addEventListener('click', () => setActive(1));
+    cardP2.addEventListener('click', () => setActive(2));
+
+    cardP1.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') setActive(1); });
+    cardP2.addEventListener('keydown', (e) => { if(e.key === 'Enter' || e.key === ' ') setActive(2); });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Reviews</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;  
+      background-color: #f9f9f9; }
+	
+ .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 5%;
+    background-color: #fad7d5;
+    position: sticky;
+    top: 0;  
+    z-index: 1000  }
+
+ .menu-bar {
+    font-size: 24px;
+    cursor: pointer;
+    color: #781727;   
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    transition: transform 0.3s ease;  }
+
+ .nav-links {
+    display: flex;
+    gap: 30px; 
+    justify-content: center;  
+    flex: 2; }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #781727;  
+    transition: 0.4s;  
+    font-size: 14px; }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: #f28aa1;
+    font-weight: bold;
+    text-decoration: none }
+
+  .logo {
+    text-decoration: none;
+    width: 45px;  
+    height: 45px;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;  }
+  
+  .logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover; 
+    display: block;  }
+
+
+ .sidebar {
+    height: 100%;
+    width: 0; 
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.8s; 
+    padding-top: 90px;  
+    border-right: 0.5px solid #f28aa1;  }
+ 
+ .sidebar a {
+    padding: 20px 35px;
+    text-decoration: none;
+    font-size: 15px;
+    color:  #4a202a;
+    display: block;
+    transition: 0.3s;  }
+
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;  }  
+
+.container{
+    width:85%;
+    max-width:1000px;
+    margin:40px auto;
+    background:#e9d6d8;
+    padding:30px;
+    border-radius:20px;
+}
+
+.recommend-section{
+    background:#caa1a6;
+    padding:40px 30px;
+    border-radius:20px;
+    color:white;
+    margin-bottom:30px;
+}
+
+.recommend-section h2{
+    text-align:center;
+    margin-bottom:40px;
+    font-weight:600;
+}
+
+.recommend-content{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+}
+
+.left-rating{
+    flex:1;
+    text-align:center;
+}
+
+.big-rating{
+    font-size:80px;
+    font-weight:600;
+}
+
+.big-stars{
+    font-size:30px;
+    color:#e75480;
+    margin-top:10px;
+}
+
+.rating-breakdown{
+    flex:1.5;
+}
+
+.bar-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+  .bar-row span{
+    width:25px;
+    font-size:14px;
+}
+
+.bar{
+    flex:1;
+    height:14px;
+    background:#e6cfd2;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    width:0%;
+    background:#d9486b;
+    border-radius:10px;
+    transition:0.6s ease;
+}
+
+.comment-frame{
+        height:380px;
+    overflow-y:auto;
+    padding-right:8px;
+}
+
+.comment-card{
+    background:white;
+    border-radius:15px;
+    padding:18px;
+    margin-bottom:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    height:auto;
+    max-width:100%;
+}
+
+
+.comment-header{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:6px;
+}
+
+.name{
+    font-weight:600;
+    color:#781727;
+}
+
+.comment-text{
+    .comment-text{
+    font-size:14px;
+    color:#555;
+    line-height:1.6;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+    word-break:break-word;
+}
+
+}
+
+.write-review{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-top:25px;
+}
+
+input, textarea{
+    width:100%;
+    padding:8px;
+    margin-bottom:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+    font-family:'Montserrat', sans-serif;
+}
+
+textarea{
+    height:90px;
+    resize:none;
+}
+
+.star-select span{
+    font-size:24px;
+    cursor:pointer;
+    color:#ccc;
+}
+
+.star-select .active{
+    color:#e75480;
+}
+
+button{
+    padding:8px 20px;
+    background:#781727;
+    border:none;
+    border-radius:20px;
+    color:white;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#5f111d;
+}
+  footer {
+    background-color: #fde2e2; 
+    padding: 60px 5%;
+    color: #781727;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr 1.5fr;
+    gap: 30px;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;  }
+
+footer.show-footer {
+    opacity: 1;
+    transform: translateY(0);   }
+
+.footer-logo img {
+    width: 150px;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);   }
+
+.footer-column h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;    }
+
+.footer-column p, .footer-column a {
+    font-size: 0.9rem;
+    margin: 8px 0;
+    text-decoration: none;
+    color: #781727;
+    display: block;
+    line-height: 1.6;   }
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: 0.3s;   }
+
+.contact-item:hover {
+    color: #f28aa1;   }
+
+.contact-item i {
+    font-size: 1.2rem;    }
+
+.fb-link {
+    color: #3b5998; 
+    font-weight: 600;}
+  
+
+</style>
+
+</head>
+
+<body>
+<nav class = "nav">
+      <div class = "menu-bar" onclick = "toggleSidebar()"> ☰ </div>
+      
+      <div class = "nav-links" >
+        <a href = "index.html" > Home </a>
+        <a href = "2AboutUs.html"> About Us </a>
+        <a href = "3WeddingPackage.html"> Wedding Packages </a>
+        <a href = "4Reviews.html"class = "active"> Reviews </a>
+        <a href = "5Reservation.html"> Reservation </a>
+      </div>
+
+      <a href = "index.html" class = "logo">
+        <img src = "logo.jpg" alt = "A&A Logo">
+      </a>
+    </nav>
+    
+    <div id = "sidebar" class = "sidebar">
+      <a href = "javascript:void(0)" class = "closebtn" onclick = "toggleSidebar()"> × </a>
+      <a href = "0Menu_Budget.html"> BUDGET </a>
+      <a href = "0Menu_Expect.html"> WHAT TO EXPECT </a>
+      <a href = "0Menu_Vendors.html"> VENDORS </a>
+      <a href = "0Menu_Venues.html"> VENUES </a>
+    </div>
+
+<div class="container">
+
+
+<div class="recommend-section">
+    <h2>100% Recommended by Couples, Parents, and Other Clients</h2>
+
+    <div class="recommend-content">
+
+        <div class="left-rating">
+            <div class="big-rating" id="averageRating">5.0</div>
+            <div class="big-stars" id="averageStars">★★★★★</div>
+        </div>
+
+        <div class="rating-breakdown">
+            <div class="bar-row"><span>5</span><div class="bar"><div class="fill" id="bar5"></div></div></div>
+            <div class="bar-row"><span>4</span><div class="bar"><div class="fill" id="bar4"></div></div></div>
+            <div class="bar-row"><span>3</span><div class="bar"><div class="fill" id="bar3"></div></div></div>
+            <div class="bar-row"><span>2</span><div class="bar"><div class="fill" id="bar2"></div></div></div>
+            <div class="bar-row"><span>1</span><div class="bar"><div class="fill" id="bar1"></div></div></div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="comment-frame" id="commentFrame"></div>
+
+
+<div class="write-review">
+    <h3>Write your review:</h3>
+
+    <form id = "reviewForm" action = "https://formsubmit.co/kahreenmikaelaarcilla@gmail.com" method="POST">
+
+        <input type="text" name="name" id="nameInput" placeholder="Your Name" required>
+
+        <div class="star-select" id="starSelect">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+        </div>
+
+        <input type="hidden" name="rating" id="ratingInput">
+
+        <textarea name="comment" id="commentInput" placeholder="Write your review..." required></textarea>
+
+        <button type="submit">Submit</button>
+        <input type="hidden" name="_subject" value = "New Website Review - A&A Events">
+        <input type="hidden" name="_captcha" value = "false">
+
+    </form>
+</div>
+
+
+</div>
+
+<script>
+
+
+function toggleSidebar(){
+    const sidebar=document.getElementById("sidebar");
+    sidebar.style.width = sidebar.style.width==="400px" ? "0" : "400px";
+}
+
+
+const defaultReviews=[
+  {name:"Angel Mapa Paragas",rating:5,comment:"They made our wedding day so beautiful from ceremony setup up to the reception..Thank you and more clients to come..😊"},
+  {name:"Jovie Hora",rating:5,comment:`Pat and Robert were very passionate with their craft. They make sure that all the details were properly cascaded to all concerned parties. Hindi sumakit ang ulo namin all throughout the wedding preparations which took more than a year. Very accommodating and responsive. Yes, there are lapses but minimal and tolerable. Very young but very professional. During our wedding, all the coordinators are very fun to work with. I saw na lahat sila nageffort ng bongga to make our dream wedding come true. Very promising, we know that with that attitude, you will grow more and more. 🙂 Keep up the very good work! Highly recommended ♥️`},
+  {name:"Lance Ferrer",rating:5,comment:"One of the Most affordable and top of the Line Coordination that we hang out and work with as a Photo and video Supplier, our team has been so chilled and smooth while we do our work as same with their clients. A&A events has never failed to produce what their client wants, they've been striving hard to make their clients Satisfied and happy. Thank you guys! Looking forward for more Events with Team A&A 💕"},
+  {name:"Chibisuke Nastor",rating:5,comment:`Their team is vey patient, helpful, and organized 😊 They handle the program or flow of the wedding professionally inspite of unexpected situations 😊 I also love how their make-up artists made my hair and make-up 😊 Highly recommended 👍👍👍`},
+  {name:"J M Reyes Nogoy",rating:5,comment:"What I recommend about A&A? Everything! I highly recommend A & A Events kung gusto niyo ng stress free wedprep. Super matyagang team + sobrang bait + Sobrang mapasensya + sobrang maasikaso + sobra lahat! And it's equal to a PERFECT WEDDING DAY! Thank you so much uys 💋"},
+  {name:"Mariz Malaza-Sigua",rating:5,comment:`I just saw A&A Events advertisement on facebook, kind of hesistant first since wala ako background sa kanila as supplier. As I inquire and talk to Ms. Patrice with their package inclusions, it made us decide already to make reservations without meeting them first. 
+Twice lang kami nakapagmeet ni Ms. Patrice & Sir Robert. Even though we had many adjustments for wedding plans due to COVID-19, their assistance made our special day stress free. 
+Thank you so much A&A Events, more power! God bless❣️`},
+  {name:"Arrianne Jane Cordero - Baldonado",rating:5,comment:`Thank you so much Guys!!! ❤️ We had a very well-coordinated wedding because of you guys! Special mention to my bridal assistant Rocel na hindi ako iniwan kahit san ako magpunta at asikasuhin kung ano yung needs ko and to Ms. Patrice and Sir Robert na sobrang effort from Quezon City to Tagaytay to check yung needs namin. Lahat ng ginawa nyo samin ay very much appreciated. Super thankful talaga kami kasi hindi kami nagkamali sa pagpili sa inyo. 🤗
+Super Thank you talagaaaaaaaa! 🥰
+God bless and More powers to you Ms. Patrice, Sir Robert and Team!!! Highly recommended! Super love love namin kayo ni Benjo! ♥️♥️♥️`},
+  {name:"Cavina Arenz",rating:5,comment:`Thank you so so much A & A Events 🥰 Di ako nagkamali sa napili ko na coordinator. Simula nung first meeting hanggang sa matapos ang event sobrang hands on nila sa preparations. Kahit pa madaming adjustments dahil nagbago bago kami ng dates dahil sa pandemic. Well coordinated yung wedding namin sa civil wedding pa lang namin nung Oct 9 lalo na sa wedding celebration namin nung Oct 31. Thank you din sa bridal assistant ko na si Rocel, pinadali mo ang buhay ko nung wedding celebration. 😊 Sa sobrang maasikaso nila , tinuring ko na din silang mga kaibigan… Roadtrip soon pls! 💕`},
+  {name:"David Monroyo Mayorga",rating:5,comment:`sobrang hands on po nila, alam na alam po nila yung gagawin sarap kasama parang kapamilya at kaibigan lang na lagi andyan para tulungan ka. kung mag hahanap kayo nang event coordinator wag na kayong mag dalawang isip pa kay A&A na promise kahit chat nyo pa ako hahahahahahhahahaahhaa. bsta magaling sila. promise.`},
+  {name:"Angelica De Guzman - Raagas",rating:5,comment:`We highly recommend A & A Events for couples who are looking for coordinator. They will make your wedding prep and wedding day stress free and kayang kaya nila iexecute lahat ng request nyo. We are so happy that our wedding is so beautiful and memorable with the help of our wedding coordinator. Shotout to Alonso family and to their coordinator’s for all the hard work! Thank you so much ❤️`},
+  {name:"Cristel O. Dulay",rating:5,comment:`SALUTE sa buong Team!🫡 They made our dream wedding PERFECT🙏🏻🥰 Mas nahigitan pa nila yung expectation namin. Sobrang effort, dedicated at napaka maalaga lahat ng buong team. Maraming  salamat sayo Ms. Patrice dahil since day 1 hindi niyo kami pinabayaan, lahat ng tanong at request namin ay talagang naexecute ng maayos. They are really amazing and highly recommended. Sobrang thank you sa lahat ng bumubuo ng A&A Team. We are so happy sa naging outcome ng wedding namin. Really AMAZING!💙💙💙`},
+  {name:"Nowel Pauco",rating:5,comment:"The planning was relatively stress-free, quick response and execution.. The team was very punctual.. Our wedding encountered very little hiccups, the food was great and the Photos and SDE's were truly exceptional.. Highly recommend.. Thank you to the entire A&A Team!.."},
+  {name:"Melson Angelo Llacuna",rating:5,comment:`Hello ma’am Patrice, gusto ko po magpasalamat ng sobra sa'yo. nabawasan yung stress sa pag-prepare ng kasal dahil sa tulong mo ma'am and sa team ng coordinators po hindi talaga kami pinabayaan,kay ma’am Barbie, ma’am Rocel, sir Chester at kay ma'am rems na sumalo sa pagiging lutang ko nung araw na yun haha. sa food po, masarap lahat and yung sa Florence photograpy team ma'am napakaganda po lahat ng pictures lalo na yung SDE!, hats off po kami sa tulong nila macapture yung special day namin ni Pau. 
+Satisfied na satisfied po kami sa naging service niyo samin ng asawa ko. Hindi po kami nagsisisi na kayo yung kinuha namin para tumulong at ayusin yung kasal namin. Maraming maraming maraming marmaing salamat sa'yo at sa team niyo ma'am Patrice.
+PS: kung binabasa mo to, kasi may event ka at gusto mo malaman kung legit ba to. Pwede ka magtanong sakin.`},
+  {name:"Pelang Zarate",rating:5,comment:`We are beyond grateful to A & A events for the assistance and support they gave so that we can have a memorable wedding despite so many challenges.  We felt so special during our event because they made sure that all our needs were taken care of, from planning up to the execution of program and even after the wedding. All the members were so kind and helpful.
+We definitely recommend this team.
+❤️❤️❤️`},
+  {name:"Eca Sarmiento-De Vera",rating:5,comment:`Hi Ms. @Patrice Arcilla-Alonso and the rest of the A&A Team..wala kaming masabi sa sobrang saya naming dalawa sa kinalabasan ng kasal namin.
+From Glam Team na nagpalabas ng ganda ko, feel ko ang ganda ganda ko kahapon grabe nakakaiyak, ultimo pamangkin ko, umiyak kasi di nya ko nakilala..nasaksihan yan nila Sofie at Carlo 😂 pati yung Team Bride very happy din kasi nagalingan sila sa Glam team. Lahat ng pegs nila nasunod..thank you din at ang gaganda ng mga parents namin 🥰
+Sa mga assistants namin, kay Sir Robot, Barbie at higit sa lahat kay Rocel,.since prenup, hands on na talaga siya sakin..sobrang gaan ng loob ko sa kanya at pati na din kay Barbie. Naoverwhelm kami kasi di kami ganun kasanay na pinagsisilbihan 🥰
+Sa catering and event designer, ang sarap sarap ng pagkain legit lalong lalo ung lasagna 😭😭 ung design ng reception ang ganda ganda, nagexceed sa expectation namin! Sobrang kudos! ♥️♥️♥️
+Sa ceremony flower arrangement, amazed na amazed din kami, promise, yung arch, aisle, grabe, wala ako masabi ♥️♥️ lalo sa mga flowers ng lahat ng entourage, lalong lalo na sa bouquet ko, bakit naman ganun, parehas na parehas naman ng peg ko masyado naman ginalingan 😭😭
+Kay Sir Florence and team, kung alam nyo lang nafeel namin after makita lahat ng results nung shots sa SDE video at photos, napailing kami kasi, grabe, as in grabe, sobrang gandaaa bakit kayo ganyan 😭😭
+At lastly, for you, and all the members of the team, thank you for making our dream wedding come true. Di namin kayo makakalimutan ♥️♥️♥️`},
+  {name:"Mary Jezsylle Anne Carlos",rating:5,comment:`Thank you very much A&A Events team, for making our wedding day a wonderful memory we will always cherish. We were amazed at how friendly and passionate every staff member is. Our wedding might be a simple one, but because of you, our special day became a spectacular one. A special thanks to Ms. Patrice for accepting us even on short notice and going the extra mile for us. A special mention goes to Florence Benneth De Borja Photography for an amazing photos and videos. I will highly recommend your team. Keep up the good work! 🤍`},
+  {name:"Jane Padolina - Buragay",rating:5,comment:`To be honest, wala ang A & A sa choices ko ng mga OTD Coordination. Nahihirapan talaga kame maghanap since matagal bago maaccept yung membership ko sa WaWies. Pero iba talaga si Lord. Ilalagay ka nya sa kung san ka mas mapapabuti 🙏 Just to share, one of the photo/video named A&A talaga yung nakita ko, pero hindi ko alam, when I searched A&A, ang nainquire-an ko na pala was A & A Events (dahil din siguro nag-inquire na ko skanla even before na hindi pa kame nagplan ng wedding). On the same day we inquired, nagbook agad kame. This is it feeling na! Nakatadhana talaga siguro kame kay Ms. Pat. 🤗 Very accommodating si Ms. Pat sa inquiries namen umpisa pa lang. Siya pa yung nagfofollow up samen pag may di kame nasesend na details. On the day of our wedding, sobrang asikaso ng team nya samen ni hubby from prep to reception. Kulang na lang ibaby kame! 😁 Thank you so much Ms. Patrice and the rest of the team for making our wedding day a memorable one! Hindi nyo kame pinabayaan! 🥺 Kudos to A& A Events! ♥️`},
+  {name:"Angel Bolabo-Ramoso",rating:5,comment:`I highly recommend A&A Events, especially, Robert, Rocel, Ian and of course Pat! Rocel was assigned to me as bride coord that day, and grabe sasabihin ko palang nagawa na niya. Wala ako sakit ng ulo sakanya. Even Ian, ‘di mareklamo and tahimik lang since he is the driver and runner. Salute din with Robert husband of Pat, he was able to control the crowd during program and was able to follow instructions really well. Overall smooth ung big day namin, there were minor problems but was able to resolve naman. Very early din sila sa call time! Hindi na namin masyado inisip ung things after reception kasi naayos na nila. ✨ Pat was also responsive sa chat kahit online meeting lang kami. Thank you, Team! 🩵`},
+  {name:"Ann Margaret Javier Julian",rating:5,comment:`Definitely recommend A & A events for your wedding needs! Hassle free and talagang they would go the extra mile to make sure that you get the dream wedding that you wish for! My husband and I definitely give them 5 stars! Mam Patrice is very hands on, very accomodating and very patient to answer all queries all questions all concerns. All the suppliers under them are all great too! You wont regret having A&A events as your project manager. From planning to execution you wont regret it. Thank you so much Mam Patrice and the whole A @ A events team for making our dream wedding a big success and unforgetable. Those A’s in the name stand for Astounding and Amazing coz definitely that is what we witnessed. Kudos A&A events! Thank you so much!`},
+  {name:"Jon Rodruiguez",rating:5,comment:"Thank you Ms. Patrice and A & A Events team!. Sobrang reliable, organized & professional niyo. From start to finish stress-free ang wedding preparation namen, even sa wedding day super smooth lang ang flow. God bless and more clients to come. 😇😇"},
+  {name:"Mitch Bautista",rating:5,comment:"SUPER HIGHLY RECOMMENDED!! Maraming salamat po sa buong team nyo!! Ang gagaan nyong kasama. Kahit laging gabi lang kami available ni groom talagang inaaccomodate kami ni Mam Patrice. Alagang alaga rin kami ni groom mula umaga hanggang matapos ang event. Sobrang laking tulong po ninyong lahat. Hindi talaga ako nastress buong araw. Wala akong inalala kahit ano kundi enjoyin lang ang araw namin. Maraming salamat po, hindi po kami nagkamali sa pagpili sa inyo. 💛💛💛 We will forever be thankful sa buong A & A Events😊"},
+  {name:"Jamie Forlales-De Guia",rating:5,comment:`First of all, we would like to thank the whole staff of A & A Events especially Ms. Pat who assisted us since the beginning of our wedding planning. Thank you for your patience and kindness to us. Superb ang buong staff, experienced namin ang asikaso from Prenup to Wedding day. Hindi lang samin ni Groom but pati sa mga entourage namin. Super asikaso and napaka babait ng staff. Thank you sa lahat po and I highly recommended this team! We look forward to A & A’s continued success and wish you have many more blessings to come!!
+Mr. & Mrs. De Guia 🩷`},
+  {name:"Jolly Villamor",rating:5,comment:"Thank you Ms. Patrice and A & A Events team for planning and organizing our wedding! Everything went amazingly well and preparation from start up to the wedding day was coordinated. Thanks again! ❤"},
+  {name:"Carolina Casas Boysillo",rating:5,comment:`I highly recommend A & A Events, sila ang binigay ni God sa amin para maging maganda, masaya at memorable ang wedding namin. 
+Maraming Salamat kay Ms. Pat and team sobrang maasikaso, maaasahan at mapagkakatiwalaan. God bless you and your team✨️  More clients to come🫶🥰
+Mr. & Mrs. Boysillo ✨️🍀`},
+  {name:"Raelanikay Badenas Niango",rating:5,comment:`Super thank you sa team nyo! From planning to execution, super organize and detailed. Annnnd super parang girl scout sila, laging handa! 😊`},
+  {name:"Klim Palma - Dorado",rating:5,comment:`I will definitely recommend A&A Events! From the planning and all, from the prenup shoot and the wedding day, super maasikaso lahat ng staffs, ikaw nalang mahihiya! Thank you so much! 💚`},
+  {name:"Marlo Vergara",rating:5,comment:`Congratulations A&A Events for the successful event. Maraming maraming salamat sa napakagandang service na binigay nyo sa amin, talagang until matapos ang event hindi nyo kami pinabayaan. 👏🏼👏🏼👏🏼 Thank you for making our wedding day, exceptional, extra special and unforgettable. Sobrang organized and well coordinated lahat. From the Coordinators, Assistants, HMUA, P/V Team, Catering, Host and up to the Catering Service, we can see how professional, passionate and expert they were on their respective assignments. Thank you so muchhh. We hope for the best for the whole A&A Team. Godbless your Team ❤️❤️❤️`},
+  {name:"May Castañeda-Perez",rating:5,comment:`Thank you, A&A Events! 🤎 
+Patrice and team did a job well done! 👏 My partner and I were very busy with our own jobs before the wedding but the team made it smooth for us. They exceeded our expectation! 😊🤎  
+Highly recommended! 💯 . A wedding is a once in a lifetime experience that’s why choosing the right team is very crucial. I can say that we made the right choice! More clients to come A&A! 👑🙏🏻`},
+  {name:"Jann Rowin Perez",rating:5,comment:`Very highly recommended! 💯In terms on full wedding package and quality. Wala ako masasabi. Una ko nagustuhan sa kanila, napakatransparent sa lahat ng add ons, sinasabi nila agad kung ano nakasama sa package.  Kumbaga walang bulagaan na sisingilin ka sa huli dahil may ganto o ganyan.
+Akala ko nung una kahit hindi sobrang sikat yung kinuha namin na team dahil nagtitipid kami ng partner ko. Macocompromise lahat ng kakalabasan pero sa A&A Events ginawa nila ng lahat para mapaganda yung one of a lifetime wedding namin. Sobrang gaang din katrabaho ni maam patrice at ng team kahit napakabusy namin ng partner ko. Napakaeffort din ng team para mapaganda yung event from Team Florence Photography, host jessa, Ceiling treatment and foods. Pati yung mga ibang guest namin. Nagandahan sa output ng event. 
+Thank you very much, A&A Events! 🫰More clients to come! 🙏`},
+  {name:"Claudhine Medina-Avila",rating:5,comment:"This team was SOLID, wala po kaming masabi sa service, it was all flawless .. we received positive feedbacks from our guest and loved ones.. sa pag aasikaso samn ni groom ng team, ung design, food and Photo Vid, everything was organized, superb and beyond expectation."},
+  {name:"Warren Cabutihan",rating:5,comment:`Nag iinquire palang ang wife ko sa A&A pero napaka accommodating na agad ni Patrice pag dating sa mga questions and quotations. Unlike sa iba na irerequire ka muna mag down payment bago ka nila sagutin. Hats off talaga kay Patrice kasi kahit madaling araw nag rereply sya. From the prep to the wedding, we felt VERY taken care of.  Kahit rushed ang wedding namin and limited lang ang budget, it was very beautiful and went very smooth. October kami nag book tapos January ang wedding date. 
+The reception was good. I really had no expectations for the reception due to our allotted budget. Pero they made it work. Host Ela is really talented. She added liveliness to the program while still maintaining grace. We got a lot of compliments regarding her.
+The ceremony was more than what I expected, and yun ang mahalaga para samin. Very intimate and solemn. All in all, you get your money's worth sa A&A.
+Thank you Patrice and team 💜`},
+  {name:"Richelle Cañete",rating:5,comment:`We were so happy and amazed at how hands-on Ma’am Patrice’s team was, from the planning stage up to our wedding day! Before the wedding, ang dami naming pinagpilian na event planners, but everything changed when we came across A&A Event’s page. I was instantly drawn to their Same-Day Edit videos and photos by Sir Florence de Borja, and right away, we booked them.
+Come wedding day, sobrang ganda ng bridal makeup, and the A&A coordinators were incredibly patient and professional. They guided us every step of the way, from the ceremony until the reception program.
+Ang ganda ng setup ng church at ng reception! The food was delicious, the host was full of energy, walang dull moment, and the program flow was perfect. The team made sure to follow everything we requested.
+The photographers and videographers were so fun to work with, we didn’t even feel pressured during the shoots we were just having fun! Best of all, our guests enjoyed as well. Thank you so much, A&A, for making our dream wedding smooth and magical! HIGHLY RECOMMENDED if you want a beautiful and unforgettable wedding! 🙌🏻💯`},
+  {name:"Dayanara Pidlaoan-Daguio",rating:5,comment:`Natupad ang Dream Wedding namin because of A & A Events!!
+I am beyond thankful and one of the best decision that we made is ipaubaya sa A & A ang wedding event namin. Naexecute ng maayos ang event, at hinigitan pa ang expectations namin. From planning to preparation to actual wedding day, very professional, always sumasagot sa queries namin, ang babait ng buong team at maalaga. 
+Thank you, Patrice and to your team. Sobrang pasasalamat talaga sainyo. Ang galing niyo!! Highly Recommended!! 🥹♥️`},
+  {name:"Princess Mendez Gaspar",rating:5,comment:`Outstanding wedding planner. Ang galing ng buong team, sa lahat ng bumubuo ng A&A Events, kudos sa inyo! Thank you Ms. Patrice nasasagot niyo lahat ng queries namin ni hubby mula sa pinakamaliit na detalye. Nakakaiyak sa tuwa makita na naexecute ng maayos yung pinapangarap ko lang nuon na wedding. Very friendly and hands on pa ang mga coor. Hindi namin nafeel ang pressure. Super memorable ang wedding planning  dahil sa buong team ni Ms. Patrice. Marami rin kaming nareceived na positive feedback from our guest. Ang ganda ng designs ng mga flowers from Church hanggang Reception. Super nagustuhan ko din yung HMUA. Yung mga food ang sarap. Yung host very lively nakakatuwa. Yung team ni florence benneth photography grabe ang effort ang husay. Quality ang mga photos and videos talaga. Maasikaso lahat. Hindi namin naramdaman yung pagod sa special day namin. Highly recommended talaga for stress free and unforgetable weddings. Thank youuu 🥰❤️🙏🏻`},
+  {name:"Jas Aspiras-Cabello",rating:5,comment:`We just had our wedding recently, and we’re beyond grateful to have chosen A&A Events as our coordinator and supplier! From planning up to the actual day, everything was handled so smoothly and professionally.
+They were so easy to work with— ang gaan kausap ng buong team, and they really listened to what we wanted for our theme and overall vibe. Ang dali lang makipag-coordinate, and they perfectly brought our vision to life!
+The coordination was excellent— super organized and calm kahit may mga unexpected situations. They always informed us about everything and asked for our decision whenever needed. They know how to adjust the schedule para walang masayang na oras. We truly felt taken care of the entire time.
+Of course, the food was delicious (ang daming guests ang nag-enjoy!), and the photo and video coverage were amazing — every shot captured the happiness, love, and fun of our big day.
+What stood out the most was how patient, thoughtful, and sincere the whole team was. You can really feel that they care. Truly, A&A Events has been a blessing to us as a couple.
+If you’re looking for a team that’s easy to work with, affordable yet outstanding in every way, and genuinely dedicated to making your wedding special — we 100% recommend A&A Events! Thank you for making our dream wedding come true. 💍✨`},
+  {name:"Ariel Macanan",rating:5,comment:"Ang alaga ng team nila Patrice, wala po kaming masabi sa service, it was well coordinated .. we received positive feedbacks from our guest and loved ones in terms of sa pag aasikaso ng team sa guest at sa amin, also the food and everything was organized and beyond expectation. Keep up sa buong team!"},
+  {name:"Roxanne Mercado-Paluyo",rating:5,comment:`Super thank you Ms. Pat and to the whole A&A team. Thank you for guiding us from the start and for going above and beyond to make our wedding day PERFECT. Your calm presence and expertise gave us peace of mind, and we are so thankful for everything you did for us. We even received positive feedbacks from our guests that our wedding is so inspiring, memorable and everything was so light. 
+The food was so delicious; the photo and video coverage were amazing and wonderful; Host Jessa was lively, fun and kept everyone entertained from start to finish; HMUA - thank you for making us so beautiful; and the coordinators - very hands on, super organized and calm. We truly felt taken care of the entire time.
+You are superb! 10/10 - Would definitely recommend A&A to the future couples.
+Again, from the bottom of our hearts, thank you so much for all the hard work. You are all talented and such a professionals. More clients to come. Godbless always! 💙💙💙
+-Ernie & Roxanne (Graduated last 12.27.25)`},
+  {name:"Claudine Valentino-Macanan",rating:5,comment:"A big thanks to A&A events for their on the day coordination. Their staff are very approachable and we had a well-coordinated and smooth wedding day."},
+  {name:"Jecca Poquiz",rating:5,comment:`We availed the full coordination with host package. A&A Events was recommended by my sister in law and it did not disappoint. Ms. Patrice is very organize, she made sure you’re on track of the timeline she set. Easy to reach out anytime even with the time difference when we were planning the wedding. 
+
+On the day of the wedding. The team was easy to work with, I felt like a princess for a day, thanks to LJ na sobrang maasikaso. Pero lahat maman sila maasikaso. Even my family commended them on how they handled the itinerary very well ‘till the end of the program. 
+
+Host Eliza is the best! Everybody loves her! 
+No dull moments. 
+
+Overall, we had a great experience. Thank you so much! Our wedding day wouldn’t be as fun as it turned out without you!`}
+];
+
+
+let reviews=JSON.parse(localStorage.getItem("reviews"))||defaultReviews;
+localStorage.setItem("reviews",JSON.stringify(reviews));
+
+let selectedRating=0;
+
+
+document.querySelectorAll("#starSelect span").forEach(star=>{
+    star.addEventListener("click",function(){
+        selectedRating=this.dataset.value;
+
+        document.getElementById("ratingInput").value = selectedRating;
+
+        document.querySelectorAll("#starSelect span").forEach(s=>{
+            s.classList.toggle("active",s.dataset.value<=selectedRating);
+        });
+    });
+});
+
+
+
+document.getElementById("reviewForm").addEventListener("submit", function(e){
+
+    const name=document.getElementById("nameInput").value;
+    const comment=document.getElementById("commentInput").value;
+
+    if(!name||!comment||selectedRating==0){
+        alert("Please complete all fields.");
+        e.preventDefault();
+        return;
+    }
+
+    reviews.push({name,rating:parseInt(selectedRating),comment});
+    localStorage.setItem("reviews",JSON.stringify(reviews));
+
+});
+
+
+function renderReviews(){
+    const frame=document.getElementById("commentFrame");
+    frame.innerHTML="";
+
+    reviews.slice().reverse().forEach(r=>{
+        frame.innerHTML+=`
+        <div class="comment-card">
+            <div class="comment-header">
+                <div class="name">${r.name}</div>
+                <div style="color:#e75480">${"★".repeat(r.rating)}${"☆".repeat(5-r.rating)}</div>
+            </div>
+            <div class="comment-text">${r.comment}</div>
+        </div>`;
+    });
+
+    updateStats();
+}
+
+function updateStats(){
+    const total=reviews.length;
+    const count={1:0,2:0,3:0,4:0,5:0};
+
+    reviews.forEach(r=>count[r.rating]++);
+
+    let avg=(reviews.reduce((sum,r)=>sum+r.rating,0)/total).toFixed(1);
+    document.getElementById("averageRating").innerText=avg;
+    document.getElementById("averageStars").innerText=
+        "★".repeat(Math.round(avg))+"☆".repeat(5-Math.round(avg));
+
+    for(let i=1;i<=5;i++){
+        let percent=(count[i]/total)*100;
+        document.getElementById("bar"+i).style.width=percent+"%";
+    }
+}
+
+renderReviews();
+
+</script>
+  <footer id = "main-footer">
+    <div class = "footer-logo">
+        <img src = "A&A.jfif" alt = "A&A Events">
+    </div>
+
+    <div class = "footer-column">
+        <h3>DEVELOPERS</h3>
+        <p>Arcilla, Kahreen Mikaela</p>
+        <p>Destriza, Kathleen Glenn</p>
+        <p>Lapuz, Khalel</p>
+        <p>Magdamit, Daynee Allison</p>
+        <p>Patungan, Camilla Sopiah</p>
+    </div>
+
+    <div class = "footer-column">
+        <h3> A&A EVENTS </h3>
+        <p> Alonso, Patrice Ghiarem </p>
+        <p> Alonso, Robert </p>
+    </div>
+
+    <div class = "footer-column">
+        <h3> CONTACTS </h3>
+        
+        <div class = "contact-item" onclick = "copyText('0936 379 5147')">
+            <i class = "fa-solid fa-phone"></i>
+            <span>0936 379 5147</span>
+        </div>
+
+        <a href = "https://www.facebook.com/eventsbyAA" target = "_blank" class = "contact-item">
+            <i class = "fa-brands fa-facebook"></i>
+            <span class = "fb-link"> A&A Events  </span>
+        </a>
+
+        <div class = "contact-item" onclick = "copyText('ghiarem.arcilla@gmail.com')">
+            <i class = "fa-solid fa-envelope"></i>
+            <span> ghiarem.arcilla@gmail.com </span>
+        </div>
+
+        <div class = "contact-item" onclick = "copyText('eventsbyaa@gmail.com')">
+            <i class = "fa-solid fa-envelope" ></i>
+            <span>eventsbyaa@gmail.com</span>
+        </div>
+    </div>
+</footer>
+    
+    <script>
+  const footerObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show-footer');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  footerObserver.observe(document.querySelector('#main-footer'));
+
+  function copyText(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Copied to clipboard: " + text);
+    });
+  }
+  </script>
+</body>
+</html>

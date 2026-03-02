@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+  <title> Menu </title>
+  <meta charset = "UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --maroon: #781727;
+      --pink-bg: #fad7d5;
+      --light-pink: #fde2e2;
+      --text-dark: #4a202a;   }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #f1eded, #f4d7dd);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      line-height: 1.4;   }
+
+    h1 {
+      text-align: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;   
+      font-size: 50px;
+      color: var(--maroon);
+      margin-bottom: 50px;    }
+    
+    h2.section-title {
+      text-align: center;
+      color: var(--maroon);
+      font-size: 2.5rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 70px;    }
+    
+    h3 {
+      color: var(--maroon);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 30px;    }
+
+    h4 {
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 20px;    }
+      
+  .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 20px;    }
+    
+     .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background: var(--text-dark);
+      position: sticky;
+      top: 0;
+      z-index: 1000;   }
+    
+    .nav-links a{
+      text-decoration:none;
+      color: var(--maroon);
+      font-size:14px;
+      font-weight:600;    }
+
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      background-color: white;
+      overflow-x: hidden;
+      transition: 0.8s;
+      padding-top: 50px;
+      border-right: 0.5px solid #f28aa1;    }
+
+    .sidebar a {
+      padding: 20px 35px;
+      text-decoration: none;
+      font-size: 15px;
+      color: var(--text-dark);
+      display: block;
+      transition: 0.3s;   }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;    }
+
+    .column-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: flex-start;
+      margin-bottom: 40px;    }
+
+    .column-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;    }
+
+    .pill {
+      background: var(--pink-bg);
+      padding: 10px 25px;
+      border-radius: 50px;
+      display: inline-block;
+      color: var(--maroon);
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: 0.3s;    }
+    
+    .pill:hover { background: #f3b4bb; }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;    }
+
+    ul li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;    }
+
+    ul li::before {
+      content: "•";
+      color: var(--maroon);
+      position: absolute;
+      left: 0;
+      font-weight: bold;    }
+    
+    .sub-list {
+      font-weight: bold;
+      color: var(--maroon);
+      margin-top: 15px;
+      display: block;    }
+
+    .img-fluid {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      object-fit: cover;    }
+
+    .venue-region-title{
+      font-size:32px;
+      text-align:center;
+      margin:70px 0 30px;
+      color:var(--text-dark);
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      font-weight:800;
+      letter-spacing:3px;       }
+
+    .venue-category-title{
+      font-size:20px;
+      margin:40px 0 20px;
+      text-transform:uppercase;
+      letter-spacing:2px;
+      color:var(--text-dark);
+      border-left:5px solid var(--maroon);
+      padding-left:15px;        }
+
+    .venue-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:25px;     }
+
+    .venue-card{
+      background:linear-gradient(to bottom right,#ffffff,#fde2e2);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+      transition:all 0.4s ease;
+      cursor:pointer;       }
+
+    .venue-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 15px 30px rgba(0,0,0,0.15);}
+
+    .venue-card img{
+      width:100%;
+      height:200px;
+      object-fit:cover;     }
+
+    .venue-card-content{
+      padding:18px;     }
+
+    .venue-card h4{
+      margin:0 0 8px;
+      color:var(--maroon);
+      font-size:16px;      font-weight:600;         }
+
+    .venue-card p{
+      font-size:13px;
+      margin:0;
+      color:#555;       }
+
+    .fade-in{
+      opacity:0;
+      transform:translateY(30px);
+      transition:all 0.8s ease;     }
+
+    .fade-in.show{
+      opacity:1;
+      transform:translateY(0);      }
+    
+    .carousel-container { position: relative; overflow: hidden; border-radius: 12px; }
+    .carousel-slide { display: flex; transition: transform 0.5s ease-in-out; }
+    .carousel-slide img { width: 100%; flex-shrink: 0; object-fit: cover; height: 200px; }
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      color: white;
+      border: none;
+      font-size: 12px;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+      transition: 0.3s;    }
+
+    .prev:hover, .next:hover { background: rgba(0,0,0,0.7); }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    .carousel-dots { position: absolute; bottom: 10px; width: 100%; text-align: center; }
+
+    .carousel-dots .dot {
+      height: 5px;
+      width: 5px;
+      margin: 0 4px;
+      display: inline-block;
+      background: rgba(255,255,255,0.6);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s;    }
+
+    .carousel-dots .dot.active { background: white; }
+
+    footer {
+      background: #4a202a;
+      padding: 60px 5%;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr 1.5fr;
+      gap: 30px;    }
+
+    .footer-logo img {
+      width: 150px;
+      background: #fff;
+      padding: 2px;    }
+
+    .footer-column h3 {
+      margin-bottom: 20px;
+      font-size: 1rem;    }
+
+    .footer-column p,
+    .footer-column a {
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: #f4d7dd;
+      display: block;
+      margin: 6px 0;     }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      margin-bottom: 10px;    }
+       
+  </style>
+</head>
+
+<body id = "home">
+
+  <nav class = "nav">
+    <div class = "menu-bar" onclick = "toggleSidebar()" style = "cursor:pointer; font-size: 24px; color: var(--light-pink);"> ☰ </div>
+
+    <div class = "nav-links">
+      <a href = "index.html" style = "cursor:pointer; font-size: 12px; color: var(--light-pink);"><i class = "fa-solid fa-arrow-left"></i> Back to Home </a>
+    </div>
+  </nav>
+  
+  <div id = "sidebar" class = "sidebar">
+    <span class = "closebtn" onclick = "toggleSidebar()"> × </span>
+    <a href = "0Menu_Budget.html" onclick = "toggleSidebar()" >BUDGET</a>
+    <a href = "0Menu_Expect.html" onclick = "toggleSidebar()" >WHAT TO EXPECT</a>
+    <a href = "0Menu_Vendors.html" onclick = "toggleSidebar()" >VENDORS</a>
+    <a href = "0Menu_Venues.html" onclick = "toggleSidebar()" >VENUES</a>
+  </div>
+  
+   <div class = "container">
+    <hr style = "border:0; border-top:1px solid; margin:10px 0;">
+
+    <section id = "0Menu_Venues.html" class = "section">
+    <h1>VENUES</h1>
+    <hr style = "border:0; border-top:1px solid; margin:10px 0;">
+
+ <div class = "venue-region-title">METRO MANILA</div>
+ <div class = "venue-category-title">Churches</div>
+ <div class = "venue-grid">
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " manilacathedral.jpg"><img src = " manilacathedral3.webp"><img src = " manilacathedral2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>Manila Cathedral</h4><p>Intramuros, Manila</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " sanagustin.JPG"><img src = " sanagustin2.jpg"><img src = " sanagustin1.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>San Agustin Church</h4><p>Intramuros, Manila</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " quiapo.jpg"><img src = " quiapo1.jpg"><img src = " quiapo2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>Minor Basilica of the Black Nazarene</h4><p>Quiapo, Manila</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " malate.jpg"><img src = " malate1.jpg"><img src = " malate2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>Our Lady of Remedies Parish</h4><p>Malate, Manila</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " sansebastian.webp"><img src = " sanseb1.jpg"><img src = " sanseb2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>San Sebastian Basilica</h4><p>Quiapo, Manila</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " sanctuario.jpg"><img src = " sanctuario2.jfif"><img src = " sanctuario2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>Santuario de San Antonio</h4><p>Forbes Park, Makati</p></div></div>
+    
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " donbosco.jpg"><img src = " donbosco1.webp"><img src = " donbosco2.webp"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>Don Bosco Parish</h4><p>Makati</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " christtheking.jpg"><img src = " christtheking1.jpg"><img src = " christtheking2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>Christ the King Parish</h4><p>Greenmeadows, Quezon City</p></div></div>
+    
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " ourlady.webp"><img src = " ourlady1.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>National Shrine of Our Mother of Perpetual Help</h4> <p>Baclaran, Paranaque</p> </div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " ustchurch.jpg"><img src = " ust1.jfif"><img src = " ust2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>Santísimo Rosario Parish (Archdiocese of Manila)</h4> <p>España, Manila</p> </div></div> 
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " carmel.webp"><img src = " carmel1.jpg"><img src = " carmel2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"><h4>Mount Carmel Shrine</h4> <p>New Manila, Quezon City</p> </div></div>
+
+     <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " 5wounds.jpg"><img src = " 5wounds1.jpg"><img src = " 5wound2.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+        <div class = "venue-card-content"> <h4>Shrine of the Five Wounds of Our Lord Jesus Christ</h4> <p>Las Piñas</p> </div></div>
+
+        
+</div>
+
+<div class="venue-category-title">Reception Venues</div>
+<div class="venue-grid">
+
+    <div class="venue-card fade-in"><img src=" peninsula.jpg"><div class="venue-card-content"><h4>The Peninsula Manila</h4><p>Makati</p></div></div>
+    <div class="venue-card fade-in"><img src=" okada.webp"><div class="venue-card-content"><h4>Okada Manila</h4><p>Parañaque</p></div></div>
+    <div class="venue-card fade-in"><img src=" shangrila.webp"><div class="venue-card-content"><h4>Shangri-La The Fort</h4><p>BGC</p></div></div>
+    <div class="venue-card fade-in"><img src=" blueleaf.jfif"><div class="venue-card-content"><h4>Blue Leaf Events Pavilion</h4><p>Taguig</p></div></div>
+    <div class="venue-card fade-in"><img src=" glassgarden.jpg"><div class="venue-card-content"><h4>Glass Garden</h4><p>Pasig</p></div></div>
+    <div class="venue-card fade-in"><img src=" palacio.jpg"><div class="venue-card-content"><h4>Palacio De Maynila</h4><p>Malate</p></div></div>
+    <div class="venue-card fade-in"><img src=" lacastellana.jpg"><div class="venue-card-content"><h4>La Castellana</h4><p>Intramuros</p></div></div>
+    <div class="venue-card fade-in"><img src=" fifth.jfif"><div class="venue-card-content"><h4>The Fifth at Rockwell</h4><p>Makati</p></div></div>
+    <div class="venue-card fade-in"><img src=" elements.jpg"><div class="venue-card-content"><h4>Elements at Eton Centris</h4><p>Quezon City</p></div></div>
+    <div class="venue-card fade-in"><img src=" fernwood.jpg"><div class="venue-card-content"><h4>Fernwood Gardens</h4><p>Quezon City</p></div></div>
+    <div class="venue-card fade-in"><img src=" polo.jpg"><div class="venue-card-content"><h4>Manila Polo Club</h4><p>Makati</p></div></div>
+    <div class="venue-card fade-in"><img src=" astoria.jpg"><div class="venue-card-content"><h4>Astoria Plaza</h4><p>Pasig</p></div></div>
+</div>
+
+<div class = "venue-region-title">TAGAYTAY</div>
+<div class = "venue-category-title">Churches</div>
+<div class = "venue-grid">
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " ina.jpg"><img src = " ina1.jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+          <div class = "venue-card-content"><h4>Ina ng Laging Saklolo Parish</h4><p>Tagaytay</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " sanantonio.jpg"><img src = " .jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+          <div class = "venue-card-content"><h4>San Antonio de Padua Batulao</h4><p>Silang, Cavite</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " chapel.jpg"><img src = " .jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+          <div class = "venue-card-content"><h4>Don Bosco Chapel on the Hill</h4><p>Nasugbu, Batangas</p></div></div>
+
+    <div class = "venue-card fade-in"> <div class = "carousel-container"> <div class = "carousel-slide">
+        <img src = " madre.jpg"><img src = " .jpg"></div>
+        <div class = "carousel-dots">
+            <span class = "dot active"></span><span class = "dot"></span><span class = "dot"></span></div>
+            <button class = "prev">&#10094;</button><button class = "next">&#10095;</button></div>
+          <div class = "venue-card-content"><h4>Madre de Dios Chapel</h4><p>Talisay, Batangas</p></div></div>
+</div>
+
+<div class = "venue-category-title">Reception Venues</div>
+<div class = "venue-grid">
+    <div class = "venue-card fade-in"><img src=" antonio.jfif"><div class = "venue-card-content"><h4>Antonio’s</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" hillcreek.jpg"><div class = "venue-card-content"><h4>Hillcreek Gardens</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" lakehotel.png"><div class = "venue-card-content"><h4>The Lake Hotel</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" alta.avif"><div class = "venue-card-content"><h4>Alta Veranda</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" taal.jpeg"><div class = "venue-card-content"><h4>Taal Vista Hotel</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" sonya.jpg"><div class = "venue-card-content"><h4>Sonya’s Garden</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" viewpark.jpg"><div class = "venue-card-content"><h4>Viewpark Hotel</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" casa.jfif"><div class = "venue-card-content"><h4>Casa Amadeo</h4><p>Silang</p></div></div>
+    <div class = "venue-card fade-in"><img src=" marcia.jpg"><div class = "venue-card-content"><h4>Marcia Adams</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" nachill.jpg"><div class = "venue-card-content"><h4>Narra Hill</h4><p>Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" iruhin.jpg"><div class = "venue-card-content"><h4>Alta D' Tagaytay Hotel</h4><p>Iruhin, Tagaytay</p></div></div>
+    <div class = "venue-card fade-in"><img src=" villa.jpg"><div class = "venue-card-content"><h4>Villa De Oro</h4><p>Tagaytay</p></div></div>
+
+</div>
+   <hr style = "border:0; border-top:20px; margin:50px 0 20px;">
+
+  <footer>
+    <div class = "footer-logo">
+      <img src = "images/A&A.jfif" alt = "A&A Events">
+    </div>
+
+    <div class = "footer-column">
+      <h4>DEVELOPERS</h4>
+      <p>Arcilla, Kahreen Mikaela</p>
+      <p>Destriza, Kathleen Glenn</p>
+      <p>Lapuz, Khalel</p>
+      <p>Magdamit, Daynee Allison</p>
+      <p>Patungan, Camilla Sopiah</p>
+    </div>
+
+    <div class = "footer-column">
+      <h4>A&A EVENTS</h4>
+      <p>Alonso, Patrice Ghiarem</p>
+      <p>Alonso, Robert</p>
+    </div>
+
+    <div class = "footer-column">
+      <h4>CONTACTS</h4>
+      <div class = "contact-item"> <i class = "fa-solid fa-phone"></i> 0936 379 5147 </div>
+      <a href = "https://www.facebook.com/eventsbyAA" target = "_blank" class = "contact-item">
+        <i class = "fa-brands fa-facebook"> </i>A&A Events
+      </a>
+      <div class = "contact-item"><i class="fa-solid fa-envelope"></i>ghiarem.arcilla@gmail.com</div>
+      <div class = "contact-item"><i class="fa-solid fa-envelope"></i>eventsbyaa@gmail.com</div>
+    </div>
+  </footer>
+
+  <script>
+    const faders = document.querySelectorAll('.fade-in');
+    const appearOptions = { threshold: 0.2 };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, observer){
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting) return;
+    entry.target.classList.add('show');
+    observer.unobserve(entry.target);
+    });
+    }, appearOptions);
+
+    faders.forEach(fader=>{
+      appearOnScroll.observe(fader);
+    });
+</script>
+
+    <script>
+    document.querySelectorAll('.venue-card').forEach(card => {
+        const slide = card.querySelector('.carousel-slide');
+        const images = slide.querySelectorAll('img');
+        const dots = card.querySelectorAll('.dot');
+        const prev = card.querySelector('.prev');
+        const next = card.querySelector('.next');
+        let index = 0;
+
+  function updateSlide() {
+        slide.style.transform = `translateX(-${index * 100}%)`;
+        dots.forEach(dot => dot.classList.remove('active'));
+        dots[index].classList.add('active');
+    }
+
+  prev.addEventListener('click', () => {
+        index = (index - 1 + images.length) % images.length;
+        updateSlide();
+    });
+
+  next.addEventListener('click', () => {
+        index = (index + 1) % images.length;
+        updateSlide();
+    });
+
+  dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+        index = i;
+        updateSlide();
+        });
+    });
+    });
+
+</script>
+  <script>
+    function toggleSidebar() {
+      let sidebar = document.getElementById("sidebar");
+      sidebar.style.width = sidebar.style.width === "350px" ? "0" : "350px";    }
+  </script> </div>
+
+</body>
+
+</html>

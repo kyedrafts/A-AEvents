@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+  <title> Menu </title>
+  <meta charset = "UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --maroon: #781727;
+      --pink-bg: #fad7d5;
+      --light-pink: #fde2e2;
+      --text-dark: #4a202a;   }
+
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(to right, #f1eded, #f4d7dd);
+      color: var(--text-dark);
+      scroll-behavior: smooth;
+      line-height: 1.4;   }
+
+    h1 {
+      text-align: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;   
+      font-size: 50px;
+      color: var(--maroon);
+      margin-bottom: 50px;    }
+    
+    h2.section-title {
+      text-align: center;
+      color: var(--maroon);
+      font-size: 2.5rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 70px;    }
+    
+    h3 {
+      color: var(--maroon);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 30px;    }
+    
+    h4 {
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 20px;    }
+      
+  .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 20px;    }
+    
+     .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 5%;
+      background: var(--text-dark);
+      position: sticky;
+      top: 0;
+      z-index: 1000;   }
+    
+    .nav-links a{
+      text-decoration:none;
+      color: var(--maroon);
+      font-size:14px;
+      font-weight:600;    }
+
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      background-color: white;
+      overflow-x: hidden;
+      transition: 0.8s;
+      padding-top: 50px;
+      border-right: 0.5px solid #f28aa1;    }
+
+    .sidebar a {
+      padding: 20px 35px;
+      text-decoration: none;
+      font-size: 15px;
+      color: var(--text-dark);
+      display: block;
+      transition: 0.3s;   }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;    }
+
+    .column-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: flex-start;
+      margin-bottom: 40px;    }
+
+    .column-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 20px;    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;    }
+
+    ul li {
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;    }
+
+    ul li::before {
+      content: "•";
+      color: var(--maroon);
+      position: absolute;
+      left: 0;
+      font-weight: bold;    }
+    
+    .sub-list {
+      font-weight: bold;
+      color: var(--maroon);
+      margin-top: 15px;
+      display: block;    }
+
+    .img-fluid {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      object-fit: cover;    }
+
+    .vendor-logo-grid {
+     display: grid;
+     grid-template-columns: repeat(4, 1fr); 
+     gap: 15px;
+     margin-top: 30px;
+     align-items: center;   }
+
+   .vendor-logo-grid img {
+     width: 100%;
+     height: auto;
+     aspect-ratio: 1 / 1;
+     object-fit: contain;
+     border-radius: 12px;
+     border: 1px solid #ddd;
+     background-color: #f9f9f9;   }
+    
+.vendors-content {  margin-bottom: 40px;  }
+
+    footer {
+      background: #4a202a;
+      padding: 60px 5%;
+      color: white;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr 1fr 1.5fr;
+      gap: 30px;    }
+
+    .footer-logo img {
+      width: 150px;
+      background: #fff;
+      padding: 2px;    }
+
+    .footer-column h3 {
+      margin-bottom: 20px;
+      font-size: 1rem;    }
+
+    .footer-column p,
+    .footer-column a {
+      font-size: 0.9rem;
+      text-decoration: none;
+      color: #f4d7dd;
+      display: block;
+      margin: 6px 0;     }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      margin-bottom: 10px;    }
+    
+  </style>
+</head>
+
+<body id = "home">
+
+  <nav class = "nav">
+    <div class = "menu-bar" onclick = "toggleSidebar()" style = "cursor:pointer; font-size: 24px; color: var(--light-pink);"> ☰ </div>
+
+    <div class = "nav-links">
+      <a href = "index.html" style = "cursor:pointer; font-size: 12px; color: var(--light-pink);"><i class = "fa-solid fa-arrow-left"></i> Back to Home </a>
+    </div>
+  </nav>
+  
+  <div id = "sidebar" class = "sidebar">
+    <span class = "closebtn" onclick = "toggleSidebar()"> × </span>
+    <a href = "0Menu_Budget.html" onclick = "toggleSidebar()" >BUDGET</a>
+    <a href = "0Menu_Expect.html" onclick = "toggleSidebar()" >WHAT TO EXPECT</a>
+    <a href = "0Menu_Vendors.html" onclick = "toggleSidebar()" >VENDORS</a>
+    <a href = "0Menu_Venues.html" onclick = "toggleSidebar()" >VENUES</a>
+  </div>
+
+    <div class = "container">
+    <hr style = "border:0; border-top:1px solid; margin:10px 0;">
+
+    <section id = "0Menu_Vendors.html" class = "section">
+    <h1>VENDORS</h1>
+    <hr style = "border:0; border-top:1px solid; margin:10px 0;">
+    <h3>INCLUDED CORE VENDORS</h3>
+    
+    <div class = "column-3">
+   <div>
+          <span class = "sub-list">Catering Team</span>
+          <ul>
+            <li>Buffet setup</li>
+            <li>Uniformed wait staff</li>
+            <li>Dinnerware & glassware</li>
+            <li>Photo & Video</li>
+            <li>Prenup shoot</li>
+            <li>Full event coverage</li>
+          </ul>
+        </div>
+        <div>
+          <span class = "sub-list">Styling & Florals</span>
+          <ul>
+            <li>Aisle flowers</li>
+            <li>Bridal bouquet</li>
+            <li>Full entourage flowers</li>
+            <li>Presidential table styling</li>
+            <li>Guest table centerpieces</li>
+          </ul>
+        </div>
+        <div>
+            <span class = "sub-list">Documentary Film</span>
+            <ul>
+              <li>SDE (included in ₱530k package)</li>
+              <li>Aerial (included in ₱530k package)</li>
+            </ul>
+            <span class = "sub-list">Host</span>
+            <ul>
+              <li>Female host / English proficient</li>
+              <li>Game facilitation</li>
+            </ul>
+        </div>
+      </div>
+
+      <h3 style = "text-align:center; margin-top:50px;">OPTIONAL VENDORS</h3>
+      <div class = "column-2">
+          <ul>
+            <li>Live musicians (quartet, quintet, full band)</li>
+            <li>Coffee booth / Mobile bar / Juice bar</li>
+            <li>Grazing table / Dessert station</li>
+            <li>Slider station / Street food station</li>
+          </ul>
+          <ul>
+            <li>Lechon</li>
+            <li>LED Wall / String lights</li>
+            <li>Moving heads</li>
+          </ul>
+      </div>
+
+      <div class = "vendor-logo-grid" >
+        <img src = "glimpse.jpg" alt="Glimpse">
+        <img src = "camilla.jpg" alt="Camilla">
+        <img src = "maria.jpg" alt="Maria's">
+        <img src = "cake.jpg" alt="NF Hair and Makeup">
+      </div>
+    </section>
+
+  <hr style = "border:0; border-top:20px; margin:50px 0 20px;">
+  
+  <footer>
+    <div class = "footer-logo">
+      <img src = "A&A.jfif" alt = "A&A Events">
+    </div>
+
+    <div class = "footer-column">
+      <h4>DEVELOPERS</h4>
+      <p>Arcilla, Kahreen Mikaela</p>
+      <p>Destriza, Kathleen Glenn</p>
+      <p>Lapuz, Khalel</p>
+      <p>Magdamit, Daynee Allison</p>
+      <p>Patungan, Camilla Sopiah</p>
+    </div>
+
+    <div class = "footer-column">
+      <h4>A&A EVENTS</h4>
+      <p>Alonso, Patrice Ghiarem</p>
+      <p>Alonso, Robert</p>
+    </div>
+
+    <div class = "footer-column">
+      <h4>CONTACTS</h4>
+      <div class = "contact-item"> <i class = "fa-solid fa-phone"></i> 0936 379 5147 </div>
+      <a href = "https://www.facebook.com/eventsbyAA" target = "_blank" class = "contact-item">
+        <i class = "fa-brands fa-facebook"> </i>A&A Events
+      </a>
+      <div class = "contact-item"><i class="fa-solid fa-envelope"></i>ghiarem.arcilla@gmail.com</div>
+      <div class = "contact-item"><i class="fa-solid fa-envelope"></i>eventsbyaa@gmail.com</div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleSidebar() {
+      let sidebar = document.getElementById("sidebar");
+      sidebar.style.width = sidebar.style.width === "350px" ? "0" : "350px";
+    }
+  </script>
+
+</body>
+
+</html>
