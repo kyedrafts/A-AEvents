@@ -334,7 +334,7 @@
       <a href="2AboutUs.html">About Us</a>
       <a href="3WeddingPackage.html">Wedding Packages</a>
       <a href="4Reviews.html">Reviews</a>
-      <a href="5Reservation.php" class="active">Reservation</a>
+      <a href="5Reservation.html" class="active">Reservation</a>
     </div>
     <a href="index.html" class="logo">
       <img src="logo.jpg" alt="A&A Logo">
@@ -531,3 +531,4 @@
 </body>
 
 </html>
+
